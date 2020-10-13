@@ -1,8 +1,25 @@
-import React from 'react';
+import React, {useState, useCallback} from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const [iterator, setIterator] = useState(0)
+  const [count, setCount] = useState(0)
+
+  // const handleChangeIterator = () => {
+  //   setIterator(iterator => {
+  //     setCount(count => count + 1)
+  //     return iterator + 1
+  //   })
+  // }
+
+  const handleChangeIterator = useCallback(() => {
+    setIterator(iterator + 1)
+    setCount(count + 1)
+  }, [iterator, count])
+
+  console.log("render")
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +35,7 @@ function App() {
         >
           Learn React
         </a>
+        <span onClick={handleChangeIterator}>{iterator}{count}</span>
       </header>
     </div>
   );
