@@ -13,7 +13,7 @@ const Table = ({data}) => {
         </tr>
       </thead>
       <tbody>{
-        data.map((item, i) => <tr key={i}>{
+        data && data.length && data.map((item, i) => <tr key={i}>{
           Object.keys(item).map((cell, key) => <td key={key}>{item[cell]}</td>)
         }</tr>)
       }</tbody>
