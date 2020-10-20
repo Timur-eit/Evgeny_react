@@ -19,31 +19,30 @@ function App() {
   function handleChange(event) {
     const { name, value } = event.target;
     setData(prev => ({...prev, [name]: value}));
-
     // console.log(event.target);
   }
 
   function handleSubmit(event) {
-    alert('Entered data: ' + inputData);
+    alert('Entered data: ' + inputData.name);
     event.preventDefault();
   }
 
   // console.log(tableData);
   console.log(inputData);
 
-
   return (
     <div className="App">
       <header className="App-header">
-      <form onSubmit={handleSubmit}>
-        <div>
-          {inputs.map(item => (
-            <input type='text' key={item} name={item} value={inputData[item]} onChange={handleChange} />
-          ))}
-        </div>
-        <button type="submit">Отправить</button>
-      </form>
+        <form onSubmit={handleSubmit}>
+          <div>
+            {inputs.map(item => (
+              <input type='text' key={item} name={item} value={inputData[item]} onChange={handleChange} />
+            ))}
+          </div>
+          <button type="submit">Отправить</button>
+        </form>
         <Table data={tableData}/>
+        {/* <Table data={[inputData]}/> */}
       </header>
     </div>
   );
