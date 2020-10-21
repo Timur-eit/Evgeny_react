@@ -58,7 +58,7 @@ const getInitialState = () => Object.fromEntries(inputs.map(inputName => [inputN
 
 function App() {
   const [tableData, setTableData] = useState([]);
-  const [inputData, setData] = useState(() => getInitialState());
+  const [inputData, setData] = useState(getInitialState);
 
   useEffect(() => {
     fetch('https://gist.githubusercontent.com/Greyewi/b6da020196da66028c3058ea0746a08f/raw/7bdb672721f7526844e137ad41f1f1bf31df4e0a/Evgeny_table.json')
@@ -68,17 +68,30 @@ function App() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setData(prev => ({id: tableData.length + 1, ...prev, [name]: value}));
+    setData(prev => ({ id: tableData.length + 1, ...prev, [name]: value }));
   }
 
   function handleSubmit(event) {
-    alert('Entered data: ' + inputData.name);
+    // alert('Entered data: ' + inputData.name);
     setTableData([...tableData].concat([inputData]))
     event.preventDefault();
   }
 
-  // console.log(tableData);
-  console.log(inputData);
+  function sortTable(field, direction) { // direction one of [1, -1]
+    setTableData(prev => [...prev].sort((a, b) => {
+      if (a[field] < b[field]) {
+        return direction * -1;
+      }
+      else if (a[field] > b[field]) {
+        return direction * 1;
+      }
+      return 0;
+    }));
+  }
+
+
+  console.log(tableData);
+  // console.log(inputData);
 
   return (
     <div className="App">
@@ -90,8 +103,10 @@ function App() {
           </div>
           <button type="submit">Отправить</button>
         </form>
-        <Table data={tableData}/>
-        {/* <Table data={[inputData]}/> */}
+        <Table 
+          data={tableData}
+          handleSort={sortTable}
+        />
       </header>
     </div>
   );
