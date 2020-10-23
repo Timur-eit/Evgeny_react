@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
+const columns = ['id', 'name', 'class', 'author', 'current versiont'];
+
 const Table = ({data, ...rest}) => {
   const [arrowDisplay, setArrowDisplay] = useState(false)
 
@@ -12,11 +14,17 @@ const Table = ({data, ...rest}) => {
     <table border="1">
       <thead>
         <tr>
-          <th>id<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='id'/></th>
-          <th>name<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='name'/></th>
-          <th>class<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='class'/></th>
-          <th>author<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='author'/></th>
-          <th>current versiont<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='current versiont'/></th>
+          {columns.map((item, i) => (
+            <th key={i}>
+              {`${item}`}
+              <SortButton
+                arrowDisplayHandler={changeArrowDisplayState}
+                displayStaty={arrowDisplay}
+                {...rest}
+                field={item}
+              />
+            </th>
+          ))}          
         </tr>
       </thead>
       <tbody>{
@@ -61,3 +69,11 @@ const SortButton = ({ field, handleSort, arrowDisplayHandler, displayStaty }) =>
 }
 
 export default Table
+
+
+
+/* <th>id<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='id'/></th>
+<th>name<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='name'/></th>
+<th>class<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='class'/></th>
+<th>author<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='author'/></th>
+<th>current versiont<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='current versiont'/></th> */
