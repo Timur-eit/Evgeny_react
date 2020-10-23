@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 const Table = ({data, ...rest}) => {
+  const [arrowDisplay, setArrowDisplay] = useState(false)
+
+  function changeArrowDisplayState() {
+    setArrowDisplay(state => !state)
+  }
+
   return(
     <table border="1">
       <thead>
         <tr>
-          <th>id<SortButton {...rest} field='id'/></th>
-          <th>name<SortButton {...rest} field='name'/></th>
-          <th>class<SortButton {...rest} field='class'/></th>
-          <th>author<SortButton {...rest} field='author'/></th>
-          <th>current versiont<SortButton {...rest} field='current versiont'/></th>
+          <th>id<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='id'/></th>
+          <th>name<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='name'/></th>
+          <th>class<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='class'/></th>
+          <th>author<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='author'/></th>
+          <th>current versiont<SortButton arrowDisplayHandler={changeArrowDisplayState} displayStaty={arrowDisplay} {...rest} field='current versiont'/></th>
         </tr>
       </thead>
       <tbody>{
@@ -28,11 +34,30 @@ Table.propTypes = {
 }
 
 Table.defaultProps = {
-  data: []  
+  data: []
 }
 
-const SortButton = ({ field, handleSort }) => {
-  return <> <span onClick={() => handleSort(field, 1)}>↓</span><span onClick={() => handleSort(field, -1)}>↑</span> </>;
+const SortButton = ({ field, handleSort, arrowDisplayHandler, displayStaty }) => {
+  return (
+    <>
+      <span onClick={() => {
+        arrowDisplayHandler()
+        handleSort(field, 1)}
+      }
+        style={{'display' : displayStaty ? 'inline' : 'none'}}
+      >
+        ↓
+      </span>
+      <span onClick={() => {
+        arrowDisplayHandler()
+        handleSort(field, -1)}
+      }
+        style={{'display' : !displayStaty ? 'inline' : 'none'}}
+      >
+        ↑
+      </span>
+    </>
+  );
 }
 
 export default Table
