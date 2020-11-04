@@ -38,7 +38,7 @@
 }
 
 thead th > span:first-child {
-  display: none;
+  /* display: none; */
 }
 
 thead th > span {
