@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Table from './components/table';
 // import data from './data/data.json';
+// import { addCookie, getCookie, deleteCookie } from './cookie'
 
 const inputs = ['name', 'class', 'author', 'version'];
 
@@ -21,20 +22,29 @@ function App() {
   const [inputData, setData] = useState(getInitialState)
   const [currentTableData, setCurrentTableData] = useCurentData(tableData, tableFilterData, setTableData, setTableFilterData)
 
+  const [checkIndexes, setcheckIndexes] = useState([])
+
   const currentTable = currentTableData && currentTableData.length
 
 
   useEffect(() => {
-    fetch('https://gist.githubusercontent.com/Greyewi/b6da020196da66028c3058ea0746a08f/raw/c809ff8ccbc22376ea6397a3460ea423ac5b40b3/Evgeny_table.json')
-      .then(response => response.json())
-      .then(data => setTableData(data))
+    // const cookie = getCookie('table')
+    const localTable = window.localStorage.getItem('table')
+
+    if (localTable) {
+      setTableData(() => JSON.parse(localTable))
+    } else {
+      fetch('https://gist.githubusercontent.com/Greyewi/b6da020196da66028c3058ea0746a08f/raw/c809ff8ccbc22376ea6397a3460ea423ac5b40b3/Evgeny_table.json')
+        .then(response => response.json())
+        .then(data => setTableData(() => data))
+      }
   }, [])
 
 
   function handleChange(event) {
     const { name, value } = event.target
 
-    console.log(tableData)
+    // console.log(tableData)
 
     setData(prev => {
       let obj = { ...prev, id: tableData.length + 1, [name]: value, isChecked: false }
@@ -44,8 +54,11 @@ function App() {
   }
 
   function handleSubmit(event) {
-    setTableData([...tableData].concat([inputData]))
+    const newTableData = [...tableData].concat([inputData])
+    setTableData(() => newTableData)
     event.preventDefault()
+    // addCookie('table', JSON.stringify(newTableData))
+    window.localStorage.setItem('table', JSON.stringify(newTableData))
   }
 
   function sortTable(field, direction) { // direction: one of [1, -1]
@@ -85,25 +98,63 @@ function App() {
     // let newTableData = currentTableData ? currentTableData.map(item => ({...item})) : tableData.map(item => ({...item}))
     // let newTableData = currentTableData.map(item => ({...item}))
 
-    let newTableData = null
+    // let newTableData = null
 
-    if (currentTable) {
-      newTableData = currentTableData.map(item => ({...item}))
-    } else {
-      newTableData = tableData.map(item => ({...item}))
-    }
+    // if (currentTable) {
+    //   newTableData = currentTableData.map(item => ({...item}))
+    // } else {
+    //   newTableData = tableData.map(item => ({...item}))
+    // }
 
-    newTableData = newTableData.map((item, i) => {
-      if (i === lineId) {
-        item.isChecked = !item.isChecked
+    // newTableData = newTableData.map((item, i) => {
+    //   if (i === lineId) {
+    //     item.isChecked = !item.isChecked
+    //   }
+    //   return item
+    // })
+
+    // setCurrentTableData(() => newTableData)
+
+    // console.log(lineId)
+
+
+    setcheckIndexes(prev => {
+      if (prev.includes(lineId)) {
+        return prev.filter(item => item !== lineId)
+      } else {
+        const newCheckIndexes = [...checkIndexes]
+        newCheckIndexes.push(lineId)
+        return newCheckIndexes
       }
-      return item
     })
 
-    setCurrentTableData(() => newTableData)
-    // не сохранятеся состояние предыдущего
-
   }
+  // console.log(checkIndexes)
+
+  function deleteRow() {
+
+    const filteredDataTable = [...tableData].filter((_, i) => !checkIndexes.includes(i))
+
+    let dataItemId = 0
+
+    const updatedDataTable = filteredDataTable.map(item => {
+      let obj = { ...item }
+      dataItemId++
+      obj.id = dataItemId
+      return obj
+    })
+
+    setCurrentTableData(() => updatedDataTable)
+    setTableData(() => updatedDataTable)
+    window.localStorage.setItem('table', JSON.stringify(updatedDataTable))
+
+    setcheckIndexes(() => [])
+
+    // ?? насколько неправильный такой подход ↓
+    let checkBoxes = document.querySelectorAll('input#checkbox')
+    checkBoxes.forEach((item) => item.checked = false)
+  }
+
 
   return (
     <div className="App">
@@ -116,6 +167,7 @@ function App() {
           <button type="submit">Отправить</button>
         </form>
 
+
         <div>
           <label>
             Search
@@ -123,11 +175,17 @@ function App() {
           </label>
         </div>
 
+        <div>
+          {checkIndexes && checkIndexes.length ? (<button className='deleteButton' onClick={() => deleteRow()}>delete row</button>) : null}
+        </div>
+
         <Table
           data={currentTable ? currentTableData : tableData}
-          // data={currentTableData}
           handleCheck={checkCurrentLine}
           handleSort={sortTable}
+
+          checkedRowsIndexes={checkIndexes}
+          handleSetCheckedRos={setcheckIndexes}
         />
       </header>
     </div>

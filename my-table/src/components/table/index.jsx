@@ -1,11 +1,10 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 
 const columns = ['id', 'name', 'class', 'author', 'current version', 'isChecked'];
 
-const Table = ({ data, handleSort, handleCheck }) => {
 
-  // const [arrowDisplay, setArrowDisplay] = useState(false)
+const Table = ({ data, handleSort, handleCheck, handleSetCheckedRos, checkedRowsIndexes }) => {
   const [arrowDisplay, setArrowDisplay] = useState('')
 
   function changeArrowDisplayState(fieldName) {
@@ -16,30 +15,40 @@ const Table = ({ data, handleSort, handleCheck }) => {
         return ''
       }
     })
-    // console.log(fieldName)
   }
 
+  function checkAll() {
+    const allIndexes = [...data].map((item, i) => item = i)    
+    handleSetCheckedRos(() => allIndexes)    
+    
+    let checkBoxes = document.querySelectorAll('input#checkbox')    
+    checkBoxes.forEach((item) => item.checked = true)
+  }  
+
   return(
+    <Fragment>
+
     <table border="1">
       <thead>
         <tr>
-        {/* !!! состояние работает для всех сразу - как исправить ? */}
-          {columns.map((item, i) => (
-            <th key={i}>
-              {`${item}`}
-              <SortButton
-                displayState={arrowDisplay}
-                // displayHandeler={() => changeArrowDisplayState(item)}
-                sort={handleSort}
-                field={item}
+          {columns.map((item, i) => {
 
-                onClick={() => {
-                  changeArrowDisplayState(item)
-                  arrowDisplay ? handleSort(item, 1) : handleSort(item, -1)}
-                }
-              />
-            </th>
-          ))}
+              if (item === 'isChecked') {
+                return <th key={i}>{`${item}`} <button onClick={() => checkAll()}>Check all</button></th>
+              } else {
+                return <th key={i}>{`${item}`}
+                  <SortButton
+                    displayState={arrowDisplay}
+                    sort={handleSort}
+                    field={item}
+                    onClick={() => {
+                      changeArrowDisplayState(item)
+                      arrowDisplay ? handleSort(item, 1) : handleSort(item, -1)}
+                    }
+                  />
+                </th>
+              }
+          })}
         </tr>
       </thead>
       <tbody>
@@ -47,18 +56,17 @@ const Table = ({ data, handleSort, handleCheck }) => {
           (item, i) => (
             <tr key={i}>
               {Object.keys(item).map((cell, key) => {
-
                 if (cell === 'isChecked') {
-                  return <td key={key}><input type="checkbox" onClick={() => handleCheck(i)} checked={item[cell]}/></td>
+                  return <td key={key}><input id="checkbox" defaultChecked={ checkedRowsIndexes.includes(i) } type="checkbox" onClick={() => handleCheck(i)}/></td>
                 } else {
                   return <td key={key}>{item[cell]}</td>
                 }
-
               })}
             </tr>)
         ) : null}
       </tbody>
     </table>
+    </Fragment>
   )
 }
 
@@ -80,14 +88,13 @@ const SortButton = ({ displayState, onClick, field }) => {
       <span style={{'display' : !displayState ? 'inline' : 'none'}}>↑</span> */}
 
       <span onClick={onClick}>{displayState === field ? '↑' : '↓'}</span>
-      {console.log(displayState)}
     </>
   );
 }
 
 export default Table
 
-
+// checked={item[cell]}
 
 
 

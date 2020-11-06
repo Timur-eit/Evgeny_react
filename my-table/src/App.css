@@ -44,3 +44,9 @@ thead th > span:first-child {
 thead th > span {
   cursor: pointer;
 }
+
+.deleteButton {
+  background: red;
+  text-transform: uppercase;
+  color: white;
+}
