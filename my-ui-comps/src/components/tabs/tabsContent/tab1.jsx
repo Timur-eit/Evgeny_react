@@ -1,0 +1,15 @@
+export const tab1ButtonName = 'Tab 1';
+export const tab1Content = <div>
+  <h1>Tab <span style={{fontWeight: 'bold'}}>1</span> Content Header</h1>
+  <p>
+    Some Tab1 Content Text    
+  </p>
+  <div>
+    Some list:
+    <ul>
+      <li>item</li>
+      <li>item</li>
+      <li>item</li>
+    </ul>
+  </div>
+</div>;

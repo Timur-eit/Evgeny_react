@@ -1,0 +1,26 @@
+.tabs {
+  width: 500px;
+  height: 350px;
+  border: 1px solid lightblue;
+  background-color: lightblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tabs__buttons {
+  width: 450px;
+  margin-bottom: 10px;
+}
+
+.tabs__buttons > button {
+  margin-right: 10px;
+}
+
+.tabs__content-box {
+  border: 1px solid lightblue;
+  width: 450px;
+  height: 250px;
+  background-color: white;
+}
