@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import Table from './components/table';
+import Modal from './UI/Modal'
 // import data from './data/data.json';
 // import { addCookie, getCookie, deleteCookie } from './cookie'
 
@@ -131,30 +132,15 @@ function App() {
   }
   // console.log(checkIndexes)
 
-  function deleteRow() {
-
+  const deleteRow = useCallback(() => {
     const filteredDataTable = [...tableData].filter((_, i) => !checkIndexes.includes(i))
-
-    let dataItemId = 0
-
-    const updatedDataTable = filteredDataTable.map(item => {
-      let obj = { ...item }
-      dataItemId++
-      obj.id = dataItemId
-      return obj
-    })
-
-    setCurrentTableData(() => updatedDataTable)
-    setTableData(() => updatedDataTable)
-    window.localStorage.setItem('table', JSON.stringify(updatedDataTable))
-
+    setCurrentTableData(() => filteredDataTable)
+    setTableData(() => filteredDataTable)
     setcheckIndexes(() => [])
+    window.localStorage.setItem('table', JSON.stringify(filteredDataTable))
+  }, [setCurrentTableData, setTableData, setcheckIndexes, checkIndexes, tableData])
 
-    // ?? насколько неправильный такой подход ↓
-    let checkBoxes = document.querySelectorAll('input#checkbox')
-    checkBoxes.forEach((item) => item.checked = false)
-  }
-
+  console.log('render')
 
   return (
     <div className="App">
@@ -166,19 +152,15 @@ function App() {
           </div>
           <button type="submit">Отправить</button>
         </form>
-
-
         <div>
           <label>
             Search
             <input type='text' onChange={search}/>
           </label>
         </div>
-
         <div>
           {checkIndexes && checkIndexes.length ? (<button className='deleteButton' onClick={() => deleteRow()}>delete row</button>) : null}
         </div>
-
         <Table
           data={currentTable ? currentTableData : tableData}
           handleCheck={checkCurrentLine}
@@ -186,6 +168,11 @@ function App() {
 
           checkedRowsIndexes={checkIndexes}
           handleSetCheckedRos={setcheckIndexes}
+        />
+        <Modal
+          disableEnforceFocus={true}
+          // ???
+          children={<div>Hello Moto</div>}
         />
       </header>
     </div>

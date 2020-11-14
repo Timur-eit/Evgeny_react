@@ -21,8 +21,8 @@ const Table = ({ data, handleSort, handleCheck, handleSetCheckedRos, checkedRows
     const allIndexes = [...data].map((item, i) => item = i)    
     handleSetCheckedRos(() => allIndexes)    
     
-    let checkBoxes = document.querySelectorAll('input#checkbox')    
-    checkBoxes.forEach((item) => item.checked = true)
+    // let checkBoxes = document.querySelectorAll('input#checkbox')    
+    // checkBoxes.forEach((item) => item.checked = true)
   }  
 
   return(
@@ -57,7 +57,7 @@ const Table = ({ data, handleSort, handleCheck, handleSetCheckedRos, checkedRows
             <tr key={i}>
               {Object.keys(item).map((cell, key) => {
                 if (cell === 'isChecked') {
-                  return <td key={key}><input id="checkbox" defaultChecked={ checkedRowsIndexes.includes(i) } type="checkbox" onClick={() => handleCheck(i)}/></td>
+                  return <td key={key}><input id="checkbox" checked={ checkedRowsIndexes.includes(i) } type="checkbox" onChange={() => handleCheck(i)}/></td>
                 } else {
                   return <td key={key}>{item[cell]}</td>
                 }
