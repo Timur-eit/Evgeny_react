@@ -1,12 +1,69 @@
-import './App.css';
-import { Tab } from './components/tabs/index';
+// import './App.css';
+import { useState } from 'react';
+import List from './ui/List';
+import { Tabs } from './ui/Tabs_states';
+import { Accordion } from './ui/Accordion';
+import { Accordion2 } from './ui/Accordion_2';
+import { tabsData } from './tabsContent/tabsData'
+import {
+  BrowserRouter as Router, // глобальня обертка (можно в индекс джс)
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
+const items = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5'];
 
 function App() {
+  const [inpitValue, setInpitValue] = useState('');
 
   return (
-    <Tab />
+    <Router>
+      <div className='links'>
+        <div className='links__link'>
+          <Link to='/tabs'>
+            Tabs with states
+          </Link>
+        </div>
+        <div className='links__link'>
+          <Link to='/list'>
+            list
+          </Link>
+        </div>
+        <div className='links__link'>
+          <Link to='/accord1'>
+            Accordion with one state
+          </Link>
+        </div>
+        <div className='links__link'>
+          <Link to='/accord2'>
+            Accordion with several states
+          </Link>
+        </div>
+      </div>
+      <Switch>
+        <Route path='/tabs'>
+          <h2>Tabs</h2>
+          <Tabs dataTabs={tabsData} />
+        </Route>
+        <Route path='/list'>
+        <h2>List</h2>
+          <List
+            items={items.map((item, i) => <div key={i} onClick={() => setInpitValue(item)}>{item}</div>)}
+            inputValue={inpitValue}
+          />
+        </Route>
+        <Route path='/accord1'>
+          <h2>Accordion</h2>
+          <Accordion dataTabs={tabsData} />
+        </Route>
+        <Route path='/accord2'>
+          <h2>Accordion 2</h2>
+          <Accordion2 dataTabs={tabsData} />
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 

@@ -1,0 +1,45 @@
+/* #portal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+.list__input {
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.list {
+  width: 70px;  
+  border: 1px solid #000;
+  border-radius: 5px;
+  background: lightblue;
+  position: absolute;  
+}
+
+.list > {
+  width: 100%;
+}
+
+.list > :hover {
+  cursor: pointer;
+  background-color: lightseagreen;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+.list__wrap {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+}

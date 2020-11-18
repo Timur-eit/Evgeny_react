@@ -5,7 +5,7 @@ import './style.css'
 const modalElem = document.querySelector('#portal')
 const element = document.createElement('div')
 
-function Modal( { children, defaultOpen = false } ) {
+function Modal({ children, defaultOpen = false }) {
   const [isOpen, setOpen] = useState(defaultOpen)
   const [coords, setCoords] = useState({})
 

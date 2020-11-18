@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 const columns = ['id', 'name', 'class', 'author', 'current version', 'isChecked'];
@@ -26,8 +26,6 @@ const Table = ({ data, handleSort, handleCheck, handleSetCheckedRos, checkedRows
   }  
 
   return(
-    <Fragment>
-
     <table border="1">
       <thead>
         <tr>
@@ -65,8 +63,7 @@ const Table = ({ data, handleSort, handleCheck, handleSetCheckedRos, checkedRows
             </tr>)
         ) : null}
       </tbody>
-    </table>
-    </Fragment>
+    </table>    
   )
 }
 
@@ -93,14 +90,3 @@ const SortButton = ({ displayState, onClick, field }) => {
 }
 
 export default Table
-
-// checked={item[cell]}
-
-
-
-
-/* <th>id<SortButton arrowDisplayHandler={changeArrowDisplayState} displayState={arrowDisplay} {...rest} field='id'/></th>
-<th>name<SortButton arrowDisplayHandler={changeArrowDisplayState} displayState={arrowDisplay} {...rest} field='name'/></th>
-<th>class<SortButton arrowDisplayHandler={changeArrowDisplayState} displayState={arrowDisplay} {...rest} field='class'/></th>
-<th>author<SortButton arrowDisplayHandler={changeArrowDisplayState} displayState={arrowDisplay} {...rest} field='author'/></th>
-<th>current versiont<SortButton arrowDisplayHandler={changeArrowDisplayState} displayState={arrowDisplay} {...rest} field='current versiont'/></th> */
