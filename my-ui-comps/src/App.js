@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import List from './ui/List';
 import { Tabs } from './ui/Tabs_states';
+import { Tabs2 } from './ui/Tabs_routing';
 import { Accordion } from './ui/Accordion';
 import { Accordion2 } from './ui/Accordion_2';
 import { tabsData } from './tabsContent/tabsData'
@@ -22,8 +23,13 @@ function App() {
     <Router>
       <div className='links'>
         <div className='links__link'>
-          <Link to='/tabs'>
+          <Link to='/tabs_states'>
             Tabs with states
+          </Link>
+        </div>
+        <div className='links__link'>
+          <Link to='/tabs_router'>
+            Tabs with routing
           </Link>
         </div>
         <div className='links__link'>
@@ -43,9 +49,13 @@ function App() {
         </div>
       </div>
       <Switch>
-        <Route path='/tabs'>
+        <Route path='/tabs_states'>
           <h2>Tabs</h2>
           <Tabs dataTabs={tabsData} />
+        </Route>
+        <Route path='/tabs_router'>
+          <h2>Tabs</h2>
+          <Tabs2 dataTabs={tabsData} />
         </Route>
         <Route path='/list'>
         <h2>List</h2>

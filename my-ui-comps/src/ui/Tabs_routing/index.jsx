@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 import {
@@ -7,44 +6,57 @@ import {
   Route,
   Link
 } from "react-router-dom";
-
+// import { Fragment } from 'react';
 
 // в UI пропсы только принимаются !
 
 // console.log(tabsData);
 
-function TabButton({ name, tabNumberChanger }) {
+function TabButton({ name}) {
   return (
-    <button onClick={tabNumberChanger}>{name}</button>
+    <button>{name}</button>
   )
 };
 
-export function Tabs({ dataTabs = [] }) { // [{tabName, component}]
-  const [activeTabName, setActiveTabName] = useState(dataTabs[0].tabName)
+export function Tabs2({ dataTabs }) { // [{tabName, component}]
+  const formattTabName = (str) => str.replace(/\s/g, '').toLowerCase()
 
   return (
-    <div className='tabs'>
-      <div className='tabs__buttons'>
-        {dataTabs.map((item, i) => {
-          return <TabButton key={i} name={item.tabName} tabNumberChanger={() => setActiveTabName(item.tabName)} />
-        })}
+    <Router>
+
+      <div className='tabs'>
+        <div className='tabs__buttons'>
+          {dataTabs.map((item, i) => {
+            return <Link to={`/tabs_router/${formattTabName(item.tabName)}`} key={i}>
+              <TabButton
+                name={item.tabName}
+              />
+            </Link>
+          })}
+        </div>
+        <div className='tabs__content-box'>
+          {dataTabs.map((item, i) => {
+            return (
+              <Switch key={i}>
+                <Route path={`/tabs_router/${formattTabName(item.tabName)}`} >
+                  <div>{item.component}</div>
+                </Route>
+              </Switch>
+          )})}
+        </div>
       </div>
-      <div className='tabs__content-box'>
-        {dataTabs.map((item, i) => {
-          if (activeTabName === item.tabName) {
-            return <div key={i}>{item.component}</div>
-          }
-        })}
-      </div>
-    </div>
+      </Router>
+
+
+
   )
 }
 
-Tabs.defaultProps = {
+Tabs2.defaultProps = {
   dataTabs: [{}]
 }
 
-Tabs.propTypes = {
+Tabs2.propTypes = {
   dataTabs: PropTypes.arrayOf(PropTypes.shape({
     tabName: PropTypes.string,
     // tabName: PropTypes.string.isRequired,
@@ -53,4 +65,4 @@ Tabs.propTypes = {
   }))
 }
 
-// element = jsx
+// // element = jsx

@@ -10,11 +10,11 @@
 }
 
 .list {
-  width: 70px;  
+  width: 70px;
   border: 1px solid #000;
   border-radius: 5px;
   background: lightblue;
-  position: absolute;  
+  position: absolute;
 }
 
 .list > {
@@ -42,4 +42,10 @@ li {
   top: 0;
   left: 0;
   opacity: 1;
+}
+
+.search__input {  
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 5px;
 }
