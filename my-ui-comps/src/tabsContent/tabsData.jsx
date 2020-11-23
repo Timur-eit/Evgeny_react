@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom'
+
 import { tab1ButtonName, tab1Content } from './tab1';
 import { tab2ButtonName, tab2Content } from './tab2';
 import { tab3ButtonName, tab3Content } from './tab3';

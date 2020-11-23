@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
+import { Redirect, useHistory } from 'react-router-dom';
 
 // в UI пропсы только принимаются !
 
@@ -13,7 +14,12 @@ function TabButton({ name, tabNumberChanger }) {
 };
 
 export function Tabs({ dataTabs = [] }) { // [{tabName, component}]
-  const [activeTabName, setActiveTabName] = useState(dataTabs[0].tabName)
+  const [activeTabName, setActiveTabName] = useState(dataTabs[0].tabName)  
+  const history = useHistory() // hook from router  
+
+  // if (activeTabName === dataTabs[2].tabName) {
+  //   return <Redirect to="/list" />
+  // }
 
   return (
     <div className='tabs'>
@@ -25,7 +31,7 @@ export function Tabs({ dataTabs = [] }) { // [{tabName, component}]
       <div className='tabs__content-box'>
         {dataTabs.map((item, i) => {
           if (activeTabName === item.tabName) {
-            return <div key={i}>{item.component}</div>
+            return <div key={i} onClick={() => history.replace('/list')}>{item.component}</div>
           }
         })}
       </div>

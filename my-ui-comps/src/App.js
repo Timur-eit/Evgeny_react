@@ -5,6 +5,7 @@ import { Tabs } from './ui/Tabs_states';
 import { Tabs2 } from './ui/Tabs_routing';
 import { Accordion } from './ui/Accordion';
 import { Accordion2 } from './ui/Accordion_2';
+import { ColorPicker } from './ui/ColorPicker';
 import { tabsData } from './tabsContent/tabsData'
 import {
   BrowserRouter as Router, // глобальня обертка (можно в индекс джс)
@@ -13,6 +14,7 @@ import {
   Link
 } from "react-router-dom";
 
+// частные случаи в конце свитча !
 
 const items = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5'];
 
@@ -47,15 +49,20 @@ function App() {
             Accordion with several states
           </Link>
         </div>
+        <div className='links__link'>
+          <Link to='/color-picker'>
+            Color Picker
+          </Link>
+        </div>
       </div>
-      <Switch>
+      <Switch>        
         <Route path='/tabs_states'>
           <h2>Tabs</h2>
           <Tabs dataTabs={tabsData} />
         </Route>
         <Route path='/tabs_router'>
           <h2>Tabs</h2>
-          <Tabs2 dataTabs={tabsData} />
+          <Tabs2 dataTabs={tabsData} originPath={'/tabs_router'} />
         </Route>
         <Route path='/list'>
         <h2>List</h2>
@@ -72,13 +79,24 @@ function App() {
           <h2>Accordion 2</h2>
           <Accordion2 dataTabs={tabsData} />
         </Route>
+        <Route path='/color-picker'>
+          <h2>Color Picker (gradinet)</h2>
+          <ColorPicker />
+        </Route>        
+        <Route exact path='/'>
+          <h2>Please choose link</h2>
+        </Route>
+        <Route path='*'>
+          404
+          Doesn't exist
+          {/* {component 404 with gifs} */}
+        </Route>
       </Switch>
     </Router>
   )
 }
 
 export default App;
-
 
 
 

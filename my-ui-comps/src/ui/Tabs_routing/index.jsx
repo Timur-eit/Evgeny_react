@@ -4,7 +4,8 @@ import {
   BrowserRouter as Router, // глобальня обертка (можно в индекс джс)
   Switch,
   Route,
-  Link
+  Link,
+  useLocation
 } from "react-router-dom";
 // import { Fragment } from 'react';
 
@@ -12,14 +13,17 @@ import {
 
 // console.log(tabsData);
 
-function TabButton({ name}) {
+function TabButton({ name }) {
   return (
     <button>{name}</button>
   )
 };
 
-export function Tabs2({ dataTabs }) { // [{tabName, component}]
+export function Tabs2({ dataTabs, originPath = '/' }) { // [{tabName, component}]
   const formattTabName = (str) => str.replace(/\s/g, '').toLowerCase()
+
+  const location = useLocation()
+  // console.log(location)
 
   return (
     <Router>
@@ -27,7 +31,7 @@ export function Tabs2({ dataTabs }) { // [{tabName, component}]
       <div className='tabs'>
         <div className='tabs__buttons'>
           {dataTabs.map((item, i) => {
-            return <Link to={`/tabs_router/${formattTabName(item.tabName)}`} key={i}>
+            return <Link to={`${location.pathname}/${formattTabName(item.tabName)}`} key={i}>
               <TabButton
                 name={item.tabName}
               />
@@ -35,14 +39,14 @@ export function Tabs2({ dataTabs }) { // [{tabName, component}]
           })}
         </div>
         <div className='tabs__content-box'>
-          {dataTabs.map((item, i) => {
-            return (
-              <Switch key={i}>
-                <Route path={`/tabs_router/${formattTabName(item.tabName)}`} >
+          <Switch>
+            {dataTabs.map((item, i) => {
+              return (              
+                <Route key={i} path={`${location.pathname}/${formattTabName(item.tabName)}`} >
                   <div>{item.component}</div>
-                </Route>
-              </Switch>
-          )})}
+                </Route>              
+            )})}
+          </Switch>
         </div>
       </div>
       </Router>
