@@ -30,7 +30,6 @@ const Table = ({ data, handleSort, handleCheck, handleSetCheckedRos, checkedRows
       <thead>
         <tr>
           {columns.map((item, i) => {
-
               if (item === 'isChecked') {
                 return <th key={i}>{`${item}`} <button onClick={() => checkAll()}>Check all</button></th>
               } else {

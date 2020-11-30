@@ -35,11 +35,8 @@ function Modal({ children, defaultOpen = false }) {
       {isOpen && ReactDom.createPortal(
         <div className='wrap' onClick={() => setOpen(!isOpen)}>
           <div className='modal' style={coords.left ? { left: coords.left - coords.width / 2, top: coords.top - coords.height / 2 } : {}} onClick={(event) => {
-              event.stopPropagation()
-              // console.log('click')
-              // console.log(event.target)
-              console.log('width ' + coords.width)
-              console.log('left ' + coords.left)
+              event.stopPropagation()              
+              // console.log(event.target)              
             }}>
             <button onClick={() => setOpen(!isOpen)}>X</button>
             {children}

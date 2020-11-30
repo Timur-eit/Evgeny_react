@@ -3,7 +3,7 @@ import './App.css';
 import Table from './components/table';
 import Modal from './UI/Modal'
 // import data from './data/data.json';
-// import { addCookie, getCookie, deleteCookie } from './cookie'
+import { addCookie, getCookie } from './cookie'
 
 const inputs = ['name', 'class', 'author', 'version'];
 
@@ -29,11 +29,11 @@ function App() {
 
 
   useEffect(() => {
-    // const cookie = getCookie('table')
-    const localTable = window.localStorage.getItem('table')
+    const cookie = getCookie('table')
+    // const localTable = window.localStorage.getItem('table')
 
-    if (localTable) {
-      setTableData(() => JSON.parse(localTable))
+    if (cookie) {
+      setTableData(() => JSON.parse(cookie))      
     } else {
       fetch('https://gist.githubusercontent.com/Greyewi/b6da020196da66028c3058ea0746a08f/raw/c809ff8ccbc22376ea6397a3460ea423ac5b40b3/Evgeny_table.json')
         .then(response => response.json())
@@ -58,8 +58,8 @@ function App() {
     const newTableData = [...tableData].concat([inputData])
     setTableData(() => newTableData)
     event.preventDefault()
-    // addCookie('table', JSON.stringify(newTableData))
-    window.localStorage.setItem('table', JSON.stringify(newTableData))
+    addCookie('table', JSON.stringify(newTableData))
+    // window.localStorage.setItem('table', JSON.stringify(newTableData))
   }
 
   function sortTable(field, direction) { // direction: one of [1, -1]
