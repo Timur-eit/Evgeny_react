@@ -50,3 +50,7 @@ thead th > span {
   text-transform: uppercase;
   color: white;
 }
+
+.get-data-button {
+  background-color: lightblue;
+}

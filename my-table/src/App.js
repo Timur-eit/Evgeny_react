@@ -3,7 +3,17 @@ import './App.css';
 import Table from './components/table';
 import Modal from './UI/Modal'
 // import data from './data/data.json';
-import { addCookie, getCookie } from './cookie'
+import { addCookie } from './cookie'
+
+import { connect } from 'react-redux'
+
+import {
+  reduxTableDataSelector,
+  checkReduxTableData,
+  getReduxTableData,
+  sortReduxTable,
+} from './models/tableData'
+
 
 const inputs = ['name', 'class', 'author', 'version'];
 
@@ -17,33 +27,22 @@ const useCurentData = (tableData, tableFilterData, setTableData, setTableFilterD
   }
 }
 
-function App() {
+function App({ reduxTableData, checkReduxTableData, getReduxTableData, sortReduxTable }) {
   const [tableData, setTableData] = useState([])
   const [tableFilterData, setTableFilterData] = useState([])
   const [inputData, setData] = useState(getInitialState)
   const [currentTableData, setCurrentTableData] = useCurentData(tableData, tableFilterData, setTableData, setTableFilterData)
-
   const [checkIndexes, setcheckIndexes] = useState([])
-
   const currentTable = currentTableData && currentTableData.length
 
-
   useEffect(() => {
-    const cookie = getCookie('table')
-    // const localTable = window.localStorage.getItem('table')
-
-    if (cookie) {
-      setTableData(() => JSON.parse(cookie))      
-    } else {
-      fetch('https://gist.githubusercontent.com/Greyewi/b6da020196da66028c3058ea0746a08f/raw/c809ff8ccbc22376ea6397a3460ea423ac5b40b3/Evgeny_table.json')
-        .then(response => response.json())
-        .then(data => setTableData(() => data))
-      }
-  }, [])
-
+    checkReduxTableData()        
+  }, []) // ??
+  // как сделать проверку checkReduxTableData при первом рендеринге без useEffect ? 
 
   function handleChange(event) {
     const { name, value } = event.target
+    // console.log(event.target)
 
     // console.log(tableData)
 
@@ -62,25 +61,22 @@ function App() {
     // window.localStorage.setItem('table', JSON.stringify(newTableData))
   }
 
-  function sortTable(field, direction) { // direction: one of [1, -1]
-    setTableData(prev => [...prev].sort((a, b) => {
-      if (a[field] < b[field]) {
-        return direction * -1;
-      }
-      else if (a[field] > b[field]) {
-        return direction * 1;
-      }
-      return 0;
-    }));
-  }
+  // function sortTable(field, direction) { // direction: one of [1, -1]
+  //   setTableData(prev => [...prev].sort((a, b) => {
+  //     if (a[field] < b[field]) {
+  //       return direction * -1;
+  //     }
+  //     else if (a[field] > b[field]) {
+  //       return direction * 1;
+  //     }
+  //     return 0;
+  //   }));
+  // }
 
   function search(event) {
     const value = event.target.value
-
     let resultData = [...tableData].filter(item => {
-
       let result = null
-
       for (const key in item) {
         if (isInputInData(value, item[key])) {
         result = item
@@ -88,37 +84,10 @@ function App() {
       }
       return result
     })
-
     setCurrentTableData(() => resultData)
   }
 
-
   function checkCurrentLine(lineId) {
-    // console.log(lineId)
-
-    // let newTableData = currentTableData ? currentTableData.map(item => ({...item})) : tableData.map(item => ({...item}))
-    // let newTableData = currentTableData.map(item => ({...item}))
-
-    // let newTableData = null
-
-    // if (currentTable) {
-    //   newTableData = currentTableData.map(item => ({...item}))
-    // } else {
-    //   newTableData = tableData.map(item => ({...item}))
-    // }
-
-    // newTableData = newTableData.map((item, i) => {
-    //   if (i === lineId) {
-    //     item.isChecked = !item.isChecked
-    //   }
-    //   return item
-    // })
-
-    // setCurrentTableData(() => newTableData)
-
-    // console.log(lineId)
-
-
     setcheckIndexes(prev => {
       if (prev.includes(lineId)) {
         return prev.filter(item => item !== lineId)
@@ -128,19 +97,18 @@ function App() {
         return newCheckIndexes
       }
     })
-
   }
-  // console.log(checkIndexes)
 
   const deleteRow = useCallback(() => {
     const filteredDataTable = [...tableData].filter((_, i) => !checkIndexes.includes(i))
     setCurrentTableData(() => filteredDataTable)
     setTableData(() => filteredDataTable)
     setcheckIndexes(() => [])
-    window.localStorage.setItem('table', JSON.stringify(filteredDataTable))
+    addCookie('table', JSON.stringify(filteredDataTable))
+    // window.localStorage.setItem('table', JSON.stringify(filteredDataTable))
   }, [setCurrentTableData, setTableData, setcheckIndexes, checkIndexes, tableData])
 
-  console.log('render')
+  
 
   return (
     <div className="App">
@@ -161,13 +129,18 @@ function App() {
         <div>
           {checkIndexes && checkIndexes.length ? (<button className='deleteButton' onClick={() => deleteRow()}>delete row</button>) : null}
         </div>
+        <div>
+          <button className='get-data-button' disabled={reduxTableData.length} onClick={() => getReduxTableData()}>Get initial data</button>
+          <button onClick={() => sortReduxTable()}>Test</button>
+        </div>
         <Table
-          data={currentTable ? currentTableData : tableData}
+          // data={currentTable ? currentTableData : tableData}
+          data={reduxTableData}
           handleCheck={checkCurrentLine}
-          handleSort={sortTable}
-
+          // handleSort={sortTable}
+          handleSort={sortReduxTable}
           checkedRowsIndexes={checkIndexes}
-          handleSetCheckedRos={setcheckIndexes}
+          handleSetCheckedRows={setcheckIndexes}
         />
         <Modal
           disableEnforceFocus={true}
@@ -198,8 +171,31 @@ function isInputInData(input, data) {
   return false
 }
 
-export default App;
+export default connect(state => ({ // куда экспортируется ?
+  reduxTableData: reduxTableDataSelector(state) // второй арнумент?
+}), {
+  checkReduxTableData,
+  getReduxTableData,
+  sortReduxTable,
+})(App)
 
+
+
+
+// useEffect(() => {
+  //   const cookie = getCookie('table')
+  //   // const localTable = window.localStorage.getItem('table')
+
+  //   if (cookie) {
+  //     // setTableData(() => JSON.parse(cookie))
+  //     reduxTableData = JSON.parse(cookie)
+  //   } else {
+  //     // fetch('https://gist.githubusercontent.com/Greyewi/b6da020196da66028c3058ea0746a08f/raw/c809ff8ccbc22376ea6397a3460ea423ac5b40b3/Evgeny_table.json')
+  //     //   .then(response => response.json())
+  //     //   .then(data => setTableData(() => data))
+  //     reduxTableData = getReduxTableData()
+  //     }
+  // }, [])
 
 
 // const [searchData, setSearchData] = useState({ searchValue: '' })

@@ -1,29 +1,30 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+
+import { connect } from 'react-redux'
+import {
+  reduxArrowDisplaySelector,
+  changeReduxArrowDisplayState,
+} from '../../models/tableData'
 
 const columns = ['id', 'name', 'class', 'author', 'current version', 'isChecked'];
 
+export const Table = ({
+  data,
+  handleSort,
+  handleCheck,
+  handleSetCheckedRows,
+  checkedRowsIndexes,
 
-const Table = ({ data, handleSort, handleCheck, handleSetCheckedRos, checkedRowsIndexes }) => {
-  const [arrowDisplay, setArrowDisplay] = useState('')
+  reduxArrowDisplay,
+  changeReduxArrowDisplayState,
+  }) => {
 
-  function changeArrowDisplayState(fieldName) {
-    setArrowDisplay(() => {
-      if (arrowDisplay !== fieldName) {
-        return fieldName
-      } else {
-        return ''
-      }
-    })
-  }
 
   function checkAll() {
-    const allIndexes = [...data].map((item, i) => item = i)    
-    handleSetCheckedRos(() => allIndexes)    
-    
-    // let checkBoxes = document.querySelectorAll('input#checkbox')    
-    // checkBoxes.forEach((item) => item.checked = true)
-  }  
+    const allIndexes = [...data].map((item, i) => item = i)
+    handleSetCheckedRows(() => allIndexes)
+  }
 
   return(
     <table border="1">
@@ -35,13 +36,12 @@ const Table = ({ data, handleSort, handleCheck, handleSetCheckedRos, checkedRows
               } else {
                 return <th key={i}>{`${item}`}
                   <SortButton
-                    displayState={arrowDisplay}
-                    sort={handleSort}
+                    displayState={reduxArrowDisplay}
                     field={item}
                     onClick={() => {
-                      changeArrowDisplayState(item)
-                      arrowDisplay ? handleSort(item, 1) : handleSort(item, -1)}
-                    }
+                      changeReduxArrowDisplayState(item)
+                      reduxArrowDisplay ? handleSort(item, 1) : handleSort(item, -1)
+                    }}
                   />
                 </th>
               }
@@ -62,7 +62,7 @@ const Table = ({ data, handleSort, handleCheck, handleSetCheckedRos, checkedRows
             </tr>)
         ) : null}
       </tbody>
-    </table>    
+    </table>
   )
 }
 
@@ -77,15 +77,42 @@ Table.defaultProps = {
 }
 
 
-const SortButton = ({ displayState, onClick, field }) => {
+const SortButton = ({
+  displayState,
+  onClick,
+  field,
+
+  // reduxArrowDisplay,
+}) => {
+
+  console.log(displayState)
+
   return (
     <>
-      {/* <span style={{'display' : displayState ? 'inline' : 'none'}}>↓</span>
-      <span style={{'display' : !displayState ? 'inline' : 'none'}}>↑</span> */}
-
       <span onClick={onClick}>{displayState === field ? '↑' : '↓'}</span>
     </>
   );
 }
 
-export default Table
+export default connect(state => ({ // куда экспортируется ?
+  reduxArrowDisplay: reduxArrowDisplaySelector(state) // второй арнумент?
+}), {
+  changeReduxArrowDisplayState
+})(Table)
+
+
+
+
+
+
+// const [arrowDisplay, setArrowDisplay] = useState('')
+
+  // function changeArrowDisplayState(fieldName) {
+  //   setArrowDisplay(() => {
+  //     if (arrowDisplay !== fieldName) {
+  //       return fieldName
+  //     } else {
+  //       return ''
+  //     }
+  //   })
+  // }
