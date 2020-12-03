@@ -19,7 +19,7 @@ import {
 const items = ['Item1', 'Item2', 'Item3', 'Item4', 'Item5'];
 
 function App() {
-  const [inpitValue, setInpitValue] = useState('');
+  const [inpitValue, setInputValue] = useState('');
 
   return (
     <Router>
@@ -67,7 +67,7 @@ function App() {
         <Route path='/list'>
         <h2>List</h2>
           <List
-            items={items.map((item, i) => <div key={i} onClick={() => setInpitValue(item)}>{item}</div>)}
+            items={items.map((item, i) => <div key={i} onClick={() => setInputValue(item)}>{item}</div>)}
             inputValue={inpitValue}
           />
         </Route>

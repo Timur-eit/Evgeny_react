@@ -2,29 +2,31 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import {
-  reduxArrowDisplaySelector,
-  changeReduxArrowDisplayState,
-} from '../../models/tableData'
-
-const columns = ['id', 'name', 'class', 'author', 'current version', 'isChecked'];
+import {  
+  arrowIdSelector,
+  changeArrowId,
+} from '../../models/tableView'
 
 export const Table = ({
+  columns,
   data,
   handleSort,
-  handleCheck,
-  handleSetCheckedRows,
-  checkedRowsIndexes,
+  
+  checkboxHandle,
+  chekedItemIndexs,  
+  checkAllCheckboxes,
 
-  reduxArrowDisplay,
-  changeReduxArrowDisplayState,
+  arrowId,
+  changeArrowId,
+
   }) => {
 
 
-  function checkAll() {
-    const allIndexes = [...data].map((item, i) => item = i)
-    handleSetCheckedRows(() => allIndexes)
-  }
+  // function checkAllChekboxes() {    
+  //   data.forEach((_, i) => {      
+  //     checkboxHandle(i)
+  //   })
+  // }
 
   return(
     <table border="1">
@@ -32,15 +34,15 @@ export const Table = ({
         <tr>
           {columns.map((item, i) => {
               if (item === 'isChecked') {
-                return <th key={i}>{`${item}`} <button onClick={() => checkAll()}>Check all</button></th>
+                return <th key={i}>{`${item}`} <button onClick={() => checkAllCheckboxes()}>Check all</button></th>
               } else {
                 return <th key={i}>{`${item}`}
                   <SortButton
-                    displayState={reduxArrowDisplay}
+                    arrowDisplayState={arrowId}
                     field={item}
                     onClick={() => {
-                      changeReduxArrowDisplayState(item)
-                      reduxArrowDisplay ? handleSort(item, 1) : handleSort(item, -1)
+                      changeArrowId(item)
+                      arrowId ? handleSort(item, 1) : handleSort(item, -1)
                     }}
                   />
                 </th>
@@ -54,7 +56,7 @@ export const Table = ({
             <tr key={i}>
               {Object.keys(item).map((cell, key) => {
                 if (cell === 'isChecked') {
-                  return <td key={key}><input id="checkbox" checked={ checkedRowsIndexes.includes(i) } type="checkbox" onChange={() => handleCheck(i)}/></td>
+                  return <td key={key}><input id="checkbox" checked={ chekedItemIndexs.includes(i) } type="checkbox" onChange={() => checkboxHandle(i)}/></td>
                 } else {
                   return <td key={key}>{item[cell]}</td>
                 }
@@ -65,6 +67,17 @@ export const Table = ({
     </table>
   )
 }
+
+const SortButton = ({
+  arrowDisplayState,
+  onClick,
+  field,  
+}) => {
+  return (    
+    <span onClick={onClick}>{arrowDisplayState === field ? '↑' : '↓'}</span>    
+  );
+}
+
 
 
 Table.propTypes = {
@@ -77,27 +90,10 @@ Table.defaultProps = {
 }
 
 
-const SortButton = ({
-  displayState,
-  onClick,
-  field,
-
-  // reduxArrowDisplay,
-}) => {
-
-  console.log(displayState)
-
-  return (
-    <>
-      <span onClick={onClick}>{displayState === field ? '↑' : '↓'}</span>
-    </>
-  );
-}
-
 export default connect(state => ({ // куда экспортируется ?
-  reduxArrowDisplay: reduxArrowDisplaySelector(state) // второй арнумент?
+  arrowId: arrowIdSelector(state) // второй арнумент?
 }), {
-  changeReduxArrowDisplayState
+  changeArrowId
 })(Table)
 
 

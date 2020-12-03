@@ -10,6 +10,8 @@ function List({ inputValue, items, defaultOpen = false }) {
   const [coords, setCoords] = useState({});
   const [availableItems, setAvailableItems] = useState(items)
 
+  // console.log(inputValue)
+
   useEffect(() => {
     selectELem.appendChild(element);    
     return () => {
@@ -27,9 +29,7 @@ function List({ inputValue, items, defaultOpen = false }) {
     }
   }, [isOpen, coords]);
 
-  function handleFilterOptions(value) {
-    
-  
+  function handleFilterOptions(value) {  
     const newItems = [...items]    
       // .map(item => item.props.children.toLowerCase())
       .filter(item => item.props.children.indexOf(value) !== -1)
@@ -47,7 +47,7 @@ function List({ inputValue, items, defaultOpen = false }) {
               <input className='search__input' type='text' onChange={(event) => handleFilterOptions(event.target.value)} onClick={(event) => event.stopPropagation()}></input>
             </div>
             {availableItems}
-            {console.log(items)}
+            {/* {console.log(items)} */}
           </div>
         </div>, element
       )}
