@@ -12,7 +12,6 @@ export const ADD_NEW_TABLE_DATA = `${prefix}/ADD_NEW_TABLE_DATA`
 export const SET_CHEKED_INDEX = `${prefix}/SET_CHEKED_INDEX`
 export const SET_ALL_CHEKED_INDEXES = `${prefix}/SET_ALL_CHEKED_INDEXES`
 export const DELETE_MARKED_DATA = `${prefix}/DELETE_MARKED_DATA`
-
 export const FIX_INITIAL_TABLE_DATA = `${prefix}/FIX_INITIAL_TABLE_DATA`
 export const SEARCH = `${prefix}/SEARCH`
 
@@ -50,8 +49,8 @@ export default function reducer(state = ReducerRecord, action) {
       })
     case DELETE_MARKED_DATA:
       return Object.assign({}, state, {
-        reduxTableData: payload.first,
-        reduxChekedIndexes: payload.second,
+        reduxTableData: payload.reduxTableData,
+        reduxChekedIndexes: payload.reduxChekedIndexes,
       })
     case FIX_INITIAL_TABLE_DATA:
       return Object.assign({}, state, {
@@ -169,10 +168,9 @@ export function deleteMarkedItem() {
     // eslint-disable-next-line array-callback-return
     const newTableData = [...reduxTableData].filter((_, i) => !reduxChekedIndexes.includes(i))
     const newreduxChekedIndexes = []
-
     dispatch({
       type: DELETE_MARKED_DATA,
-      payload: { first: newTableData, second: newreduxChekedIndexes }
+      payload: { reduxTableData: newTableData, reduxChekedIndexes: newreduxChekedIndexes }
     })
   }
 }
