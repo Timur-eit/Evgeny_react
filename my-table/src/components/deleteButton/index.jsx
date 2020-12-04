@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import {
-  // reduxTableDataSelector,
+import {  
   reduxChekedIndexesSelector,
   deleteMarkedItem,
 } from '../../models/tableData'
@@ -19,8 +18,7 @@ function DeleteButton({ reduxChekedIndexes, deleteMarkedItem }) {
 }
 
 export default connect(state=> ({
-  reduxChekedIndexes: reduxChekedIndexesSelector(state),
-  // reduxTableData: reduxTableDataSelector(state), // второй арнумент?
+  reduxChekedIndexes: reduxChekedIndexesSelector(state),  
 }), {
   deleteMarkedItem,
 })(DeleteButton)

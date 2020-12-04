@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect'
 import { addCookie, getCookie } from '../cookie'
-// import data from '../data/data.json';
 
 // Constants
 
@@ -10,22 +9,19 @@ const prefix = moduleName
 export const GET_TABLE_DATA = `${prefix}/GET_TABLE_DATA`
 export const SORT_TABLE = `${prefix}/SORT_TABLE`
 export const ADD_NEW_TABLE_DATA = `${prefix}/ADD_NEW_TABLE_DATA`
-
 export const SET_CHEKED_INDEX = `${prefix}/SET_CHEKED_INDEX`
 export const SET_ALL_CHEKED_INDEXES = `${prefix}/SET_ALL_CHEKED_INDEXES`
-
 export const DELETE_MARKED_DATA = `${prefix}/DELETE_MARKED_DATA`
 
+export const FIX_INITIAL_TABLE_DATA = `${prefix}/FIX_INITIAL_TABLE_DATA`
 export const SEARCH = `${prefix}/SEARCH`
-
 
 // Reducer
 
 export const ReducerRecord = {
   reduxTableData: [],
-  reduxArrowDisplay: '',
-  reduxSearchResultData: [],
   reduxChekedIndexes: [],
+  savedTableData: [],
 }
 
 export default function reducer(state = ReducerRecord, action) {
@@ -57,9 +53,14 @@ export default function reducer(state = ReducerRecord, action) {
         reduxTableData: payload.first,
         reduxChekedIndexes: payload.second,
       })
+    case FIX_INITIAL_TABLE_DATA:
+      return Object.assign({}, state, {
+        savedTableData: payload,
+      })
     case SEARCH:
       return Object.assign({}, state, {
-        reduxTableData: payload,
+        reduxTableData: payload.reduxTableData,
+        savedTableData: payload.savedTableData,
       })
     default:
       return state
@@ -70,12 +71,8 @@ export default function reducer(state = ReducerRecord, action) {
 
 export const stateSelector = state => state[moduleName]
 export const reduxTableDataSelector = createSelector(stateSelector, state => state.reduxTableData)
-
 export const reduxChekedIndexesSelector = createSelector(stateSelector, state => state.reduxChekedIndexes)
-
-export const reduxSearchResultDataSelector = createSelector(stateSelector, state => state.reduxSearchResultData)
-
-
+export const savedTableDataSelector = createSelector(stateSelector, state => state.savedTableData)
 
 // Action creators
 
@@ -180,18 +177,43 @@ export function deleteMarkedItem() {
   }
 }
 
+export function fixInitialTableData() {
+
+  return (dispatch, getState) => {
+    console.log('invoke inner fixInitialTableData')
+    const { reduxTableData } = getState()[moduleName]
+    const { savedTableData } = getState()[moduleName]
+
+    let newSavedData = []
+
+    console.log('length of savedTableData ' + savedTableData.length)
+
+    if (savedTableData.length < 1) {
+      newSavedData = [...reduxTableData]
+    } else {
+      newSavedData = [...savedTableData]
+    }
+
+    dispatch({
+      type: FIX_INITIAL_TABLE_DATA,
+      payload: newSavedData,
+    })
+  }
+}
+
 
 export function search(event) {
+  // fixInitialTableData() нельзя вызвать экшн отсюда
   return (dispatch, getState) => {
+
     const { value } = event.target
     const { reduxTableData } = getState()[moduleName]
-    const { currentreduxTableData } = getState()[moduleName]
+    const { savedTableData } = getState()[moduleName]
 
-    // console.log(currentreduxTableData)
     let resultData = null
-    if (value.length === 0) {
-      resultData = [...currentreduxTableData]
-    } else {
+    let newSavedData = [...savedTableData]
+
+    if (value.length > 0) {
       // eslint-disable-next-line array-callback-return
       resultData = [...reduxTableData].filter(item => {
         let result = null
@@ -202,11 +224,14 @@ export function search(event) {
         }
         return result
       })
+    } else {
+      resultData = [...savedTableData]
+      newSavedData = []
     }
 
     dispatch({
       type: SEARCH,
-      payload: resultData,
+      payload: { reduxTableData: resultData, savedTableData: newSavedData }
     })
   }
 }

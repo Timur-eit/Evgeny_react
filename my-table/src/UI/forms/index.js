@@ -11,7 +11,6 @@ function Forms({
   reduxInputsData,
   inputDataChange,
   setInitialFields,
-
   inputs,
   submit,
 }) {
@@ -22,13 +21,14 @@ function Forms({
 
   return (
     <>
-      <h4>Please input and submit to add new data</h4>
+      <p>Please input and submit to add new data</p>
       <form onSubmit={submit}>
         <div>
           {inputs.map((item, key) =>
-            <div>
-              <label for={item}>{item}</label>
-              <input type='text' key={key} name={item} value={reduxInputsData[item]} onChange={inputDataChange} />
+            <div key={key}>
+              <label htmlFor={item}>{item}</label>
+              {/* <input type='text' name={item} value={reduxInputsData[item]} onChange={inputDataChange} /> */}
+              <input type='text' name={item} defaultValue={reduxInputsData[item]} onChange={inputDataChange} />
             </div>)}
         </div>
         <button type="submit">Submit data</button>

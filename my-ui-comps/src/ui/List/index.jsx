@@ -34,6 +34,7 @@ function List({ inputValue, items, defaultOpen = false }) {
       // .map(item => item.props.children.toLowerCase())
       .filter(item => item.props.children.indexOf(value) !== -1)
     setAvailableItems(newItems)
+    console.log(items)
   }  
 
   return (

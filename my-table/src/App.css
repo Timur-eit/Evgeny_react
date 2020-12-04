@@ -54,3 +54,7 @@ thead th > span {
 .get-data-button {
   background-color: lightblue;
 }
+
+p {
+  margin: 10px;
+}
