@@ -176,7 +176,6 @@ export function deleteMarkedItem() {
 }
 
 export function fixInitialTableData() {
-
   return (dispatch, getState) => {
     console.log('invoke inner fixInitialTableData')
     const { reduxTableData } = getState()[moduleName]
@@ -203,11 +202,9 @@ export function fixInitialTableData() {
 export function search(event) {
   // fixInitialTableData() нельзя вызвать экшн отсюда
   return (dispatch, getState) => {
-
     const { value } = event.target
     const { reduxTableData } = getState()[moduleName]
     const { savedTableData } = getState()[moduleName]
-
     let resultData = null
     let newSavedData = [...savedTableData]
 
