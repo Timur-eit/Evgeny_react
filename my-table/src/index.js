@@ -7,9 +7,14 @@ import * as serviceWorker from './serviceWorker';
 import store from './redux/store'
 import { Provider } from 'react-redux'
 
+import { ConnectedRouter } from 'connected-react-router'
+import history from './history'
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />,
+    <ConnectedRouter history={history}>
+      <App />,
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root')
 );

@@ -113,11 +113,37 @@ export function sortReduxTable(field, direction) { // direction: one of [1, -1]
   }
 }
 
-export function addNewTableData() {
+// export function addNewTableData() {
+//   return (dispatch, getState) => {
+//     const { reduxTableData } = getState()[moduleName]
+//     const { reduxInputsData } = getState()['app-form']
+//     const newTableData = [...reduxTableData].concat([reduxInputsData])
+//     addCookie('table', JSON.stringify(newTableData))
+
+//     dispatch({
+//       type: ADD_NEW_TABLE_DATA,
+//       payload: newTableData,
+//     })
+//   }
+// }
+
+export function addNewTableData(fieldsNames, formData) {
   return (dispatch, getState) => {
-    const { reduxTableData } = getState()[moduleName]
-    const { reduxInputsData } = getState()['app-form']
-    const newTableData = [...reduxTableData].concat([reduxInputsData])
+    const { reduxTableData } = getState()[moduleName]    
+    const newTableItem = fieldsNames.reduce((obj, currKey) => {
+      if (currKey === 'id') {
+        obj[currKey] = Math.trunc(Math.random() * 100)
+      } else if (currKey === 'isChecked') {
+        obj[currKey] = false
+      } else if (currKey === 'current version') {
+        obj[currKey] = formData['version']
+      } else {
+        obj[currKey] = formData[currKey]
+      }
+      return obj
+    }, {})
+
+    const newTableData = [...reduxTableData].concat([newTableItem])
     addCookie('table', JSON.stringify(newTableData))
 
     dispatch({

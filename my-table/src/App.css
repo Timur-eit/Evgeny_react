@@ -58,3 +58,7 @@ thead th > span {
 p {
   margin: 10px;
 }
+
+a:visited {
+  color: lightblue;
+}
