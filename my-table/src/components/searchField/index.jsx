@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux'
-import {  
+import {
   search,
-  fixInitialTableData,  
+  fixInitialTableData,
 } from '../../models/tableData'
 import '../../App.css';
 
-function SearchField({ search, fixInitialTableData }) { 
+import { withRouter } from 'react-router'
 
-  function chanheHandler(event) {
+import { useLocation } from 'react-router-dom'
+
+let SearchField = ({ search, fixInitialTableData, history }) => {
+
+  // const useQuery = () => new URLSearchParams(useLocation().search)
+  // const setQuery = useQuery()
+
+  const chanheHandler = useCallback((event) => {
     fixInitialTableData()
     search(event)
-  }  
-  
+    const { value } = event.target
+    history.push({ search: `?search=${value}` })   
+
+    // setQuery.set('search', value)
+    // console.log(setQuery.get('search'))
+  }, [fixInitialTableData, search])
+
+  // function chanheHandler(event) {
+
+
+    // event.preventDefault()
+    // window.location.search = `?${value}`
+  // }
+
   return (
     <div>
       <label>
@@ -23,7 +42,11 @@ function SearchField({ search, fixInitialTableData }) {
   )
 }
 
-export default connect(null, {
+SearchField = connect(null, {
   search,
   fixInitialTableData,
 })(SearchField)
+
+SearchField = withRouter(SearchField)
+
+export default SearchField

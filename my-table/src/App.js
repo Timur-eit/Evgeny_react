@@ -45,7 +45,7 @@ function App({
       <header className="App-header">
         <Link to='/table'>Table</Link>
         <Switch>
-          <Route path='/table' render={() =>
+          <Route path='/table'>
             <div>
               <SearchField />
               <DeleteButton />
@@ -63,8 +63,7 @@ function App({
               />
               <ReduxFormsExample initialData={location.query} onSubmit={(data) => addNewTableData(tableColumns, data)} />
             </div>
-          }/>
-
+          </Route>          
           <Route exact path='/'>
             <p>Please choose link</p>
           </Route>
@@ -75,8 +74,6 @@ function App({
         </Switch>
       </header>
     </div>
-
-
   );
 }
 

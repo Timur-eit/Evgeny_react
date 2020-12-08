@@ -2,18 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
-import {  
+import {
   arrowIdSelector,
   changeArrowId,
 } from '../../models/tableView'
+import './style.css'
 
 export const Table = ({
   columns,
   data,
   handleSort,
-  
+
   checkboxHandle,
-  chekedItemIndexs,  
+  chekedItemIndexs,
   checkAllCheckboxes,
 
   arrowId,
@@ -22,8 +23,8 @@ export const Table = ({
   }) => {
 
 
-  // function checkAllChekboxes() {    
-  //   data.forEach((_, i) => {      
+  // function checkAllChekboxes() {
+  //   data.forEach((_, i) => {
   //     checkboxHandle(i)
   //   })
   // }
@@ -58,7 +59,11 @@ export const Table = ({
                 if (cell === 'isChecked') {
                   return <td key={key}><input id="checkbox" checked={ chekedItemIndexs.includes(i) } type="checkbox" onChange={() => checkboxHandle(i)}/></td>
                 } else {
-                  return <td key={key}>{item[cell]}</td>
+                  return <td key={key}>{
+                    chekedItemIndexs.includes(i) && cell !== 'id' ? <textarea className='table-input' value={item[cell]}/> : item[cell]
+                  }</td> //
+                  // onChange in tableData
+                  // thunk
                 }
               })}
             </tr>)
@@ -71,10 +76,10 @@ export const Table = ({
 const SortButton = ({
   arrowDisplayState,
   onClick,
-  field,  
+  field,
 }) => {
-  return (    
-    <span onClick={onClick}>{arrowDisplayState === field ? '↑' : '↓'}</span>    
+  return (
+    <span onClick={onClick}>{arrowDisplayState === field ? '↑' : '↓'}</span>
   );
 }
 
