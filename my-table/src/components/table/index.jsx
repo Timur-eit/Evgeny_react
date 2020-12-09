@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { connect } from 'react-redux'
@@ -6,28 +6,36 @@ import {
   arrowIdSelector,
   changeArrowId,
 } from '../../models/tableView'
+
+import {
+  changeMarkedTableData,
+} from '../../models/tableData'
+
 import './style.css'
 
 export const Table = ({
   columns,
   data,
   handleSort,
-
   checkboxHandle,
   chekedItemIndexs,
   checkAllCheckboxes,
-
   arrowId,
   changeArrowId,
-
+  changeMarkedTableData
   }) => {
 
+  const [fieldData, setFieldData] = useState([])
+  const [fieldName, fieldValue] = fieldData
 
-  // function checkAllChekboxes() {
-  //   data.forEach((_, i) => {
-  //     checkboxHandle(i)
-  //   })
-  // }
+  function inputhHandler(id, event, fieldName) {
+    const { value } = event.target
+    // console.log('id: ' + id)
+    // console.log(value)
+    // console.log(fieldName)
+    setFieldData(() => [fieldName, value])
+    console.log(fieldData)
+  }
 
   return(
     <table border="1">
@@ -57,13 +65,14 @@ export const Table = ({
             <tr key={i}>
               {Object.keys(item).map((cell, key) => {
                 if (cell === 'isChecked') {
-                  return <td key={key}><input id="checkbox" checked={ chekedItemIndexs.includes(i) } type="checkbox" onChange={() => checkboxHandle(i)}/></td>
+                  return <td key={key}>
+                    <input id="checkbox" checked={ chekedItemIndexs.includes(i) } type="checkbox" onChange={() => checkboxHandle(i)}/>
+                    {chekedItemIndexs.includes(i) ? <button onClick={() => changeMarkedTableData(i, fieldName, fieldValue)}>Ткни меня</button> : null }
+                  </td>
                 } else {
                   return <td key={key}>{
-                    chekedItemIndexs.includes(i) && cell !== 'id' ? <textarea className='table-input' value={item[cell]}/> : item[cell]
-                  }</td> //
-                  // onChange in tableData
-                  // thunk
+                    chekedItemIndexs.includes(i) && cell !== 'id' ? <textarea className='table-input' defaultValue={item[cell]} onChange={(event) => inputhHandler(i, event, cell)}/> : item[cell]
+                  }</td> //                 
                 }
               })}
             </tr>)
@@ -98,22 +107,6 @@ Table.defaultProps = {
 export default connect(state => ({ // куда экспортируется ?
   arrowId: arrowIdSelector(state) // второй арнумент?
 }), {
-  changeArrowId
+  changeArrowId,
+  changeMarkedTableData,
 })(Table)
-
-
-
-
-
-
-// const [arrowDisplay, setArrowDisplay] = useState('')
-
-  // function changeArrowDisplayState(fieldName) {
-  //   setArrowDisplay(() => {
-  //     if (arrowDisplay !== fieldName) {
-  //       return fieldName
-  //     } else {
-  //       return ''
-  //     }
-  //   })
-  // }

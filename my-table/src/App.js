@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import './App.css';
-import Table from './components/table';
+import 'App.css';
+import Table from 'components/table';
 import Modal from './UI/Modal'
 // import Forms from './UI/forms'
 import DeleteButton from './components/deleteButton'
@@ -17,7 +17,7 @@ import {
   search,
   reduxChekedIndexesSelector,
   setChekedItemIndex,
-  setAllItemsCheked,
+  setAllItemsCheked,  
 } from './models/tableData'
 
 
@@ -32,7 +32,7 @@ function App({
   reduxChekedIndexes,
   setChekedItemIndex,
   setAllItemsCheked,  
-  location,
+  // location,
 }) {
 
   useEffect(() => {
@@ -61,7 +61,8 @@ function App({
                 disableEnforceFocus={true} // ???
                 children={<div>Hello Moto</div>}
               />
-              <ReduxFormsExample initialData={location.query} onSubmit={(data) => addNewTableData(tableColumns, data)} />
+              {/* <ReduxFormsExample initialData={location.query} onSubmit={(data) => addNewTableData(tableColumns, data)} /> */}
+              <ReduxFormsExample onSubmit={(data) => addNewTableData(tableColumns, data)} />
             </div>
           </Route>          
           <Route exact path='/'>
@@ -80,7 +81,7 @@ function App({
 export default connect(state => ({
   reduxTableData: reduxTableDataSelector(state),
   reduxChekedIndexes: reduxChekedIndexesSelector(state),
-  location: state.router.location,
+  // location: state.router.location, 
 }), {
   getReduxTableData,
   sortReduxTable,

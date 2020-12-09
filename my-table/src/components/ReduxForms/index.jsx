@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form'
+import { connect } from 'react-redux'
 
 const inputs = ['name', 'class', 'author', 'version']
 
-function ReduxFormsExample({
+let ReduxFormsExample = ({
   handleSubmit,
   initialize,
   initialData,
@@ -12,20 +13,21 @@ function ReduxFormsExample({
   // setInitialFields,
   // submit,
   // addNewTableData,
-}) {
 
-  useEffect(() => {
-    initialize(initialData)
-  }, [initialize, initialData])
+}) => {
+
+  // useEffect(() => {
+  //   initialize(initialData)
+  // }, [initialize, initialData])
 
   return (
     <>
-      <p>Please input and submit to add new data</p>      
+      <p>Please input and submit to add new data</p>
       <form onSubmit={handleSubmit}>
         {inputs.map((item, key) =>
           <div key={key}>
-            <label htmlFor={item}>{item}</label>
-            <Field name={item} component='input' type='text' />
+            <label htmlFor={item}>{item}</label>            
+            <Field name={item} component='input' type='text' />            
           </div>)}
         <button type="submit">Submit data</button>
       </form>
@@ -33,6 +35,14 @@ function ReduxFormsExample({
   )
 }
 
-export default reduxForm({
+ReduxFormsExample = reduxForm({
   form: 'reduxFormExample',
 })(ReduxFormsExample)
+
+ReduxFormsExample = connect(
+  state => ({
+    initialValues: state.router.location.query
+  })
+)(ReduxFormsExample)
+
+export default ReduxFormsExample

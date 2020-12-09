@@ -15,6 +15,8 @@ export const DELETE_MARKED_DATA = `${prefix}/DELETE_MARKED_DATA`
 export const FIX_INITIAL_TABLE_DATA = `${prefix}/FIX_INITIAL_TABLE_DATA`
 export const SEARCH = `${prefix}/SEARCH`
 
+export const CHANGE_MARKED_DATA = `${prefix}/CHANGE_MARKED_DATA`
+
 // Reducer
 
 export const ReducerRecord = {
@@ -61,6 +63,11 @@ export default function reducer(state = ReducerRecord, action) {
         reduxTableData: payload.reduxTableData,
         savedTableData: payload.savedTableData,
       })
+    case CHANGE_MARKED_DATA:
+      return Object.assign({}, state, {
+        reduxTableData: payload.reduxTableData,
+        reduxChekedIndexes: payload.reduxChekedIndexes,
+      })
     default:
       return state
   }
@@ -76,8 +83,11 @@ export const savedTableDataSelector = createSelector(stateSelector, state => sta
 // Action creators
 
 export function getReduxTableData() {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     let newReduxTableData = []
+    // const { query } = getState()['router'].location
+    // console.log(query)
+
     const cookie = getCookie('table')
     if (cookie) {
       newReduxTableData.push(...JSON.parse(cookie))
@@ -129,7 +139,7 @@ export function sortReduxTable(field, direction) { // direction: one of [1, -1]
 
 export function addNewTableData(fieldsNames, formData) {
   return (dispatch, getState) => {
-    const { reduxTableData } = getState()[moduleName]    
+    const { reduxTableData } = getState()[moduleName]
     const newTableItem = fieldsNames.reduce((obj, currKey) => {
       if (currKey === 'id') {
         obj[currKey] = Math.trunc(Math.random() * 100)
@@ -224,7 +234,6 @@ export function fixInitialTableData() {
   }
 }
 
-
 export function search(event) {
   // fixInitialTableData() нельзя вызвать экшн отсюда
   return (dispatch, getState) => {
@@ -275,3 +284,20 @@ function isInputInData(input, data) {
   return false
 }
 
+
+export function changeMarkedTableData(id, field, newFieldData ) {
+  return (dispatch, getState) => {
+    const { reduxTableData } = getState()[moduleName]    
+    // const { reduxChekedIndexes } = getState()[moduleName]    
+
+    let newReduxTableData = [...reduxTableData]    
+    newReduxTableData[id][field] = newFieldData
+    // console.log('id ' + id)
+    // console.log('field ' + field)
+    // console.log('newData ' + newFieldData)   
+    dispatch({
+      type: CHANGE_MARKED_DATA,
+      payload: { reduxTableData: newReduxTableData, reduxChekedIndexes: []}
+    })
+  }
+}
