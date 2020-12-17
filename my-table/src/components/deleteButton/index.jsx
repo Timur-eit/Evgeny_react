@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 import {  
-  reduxChekedIndexesSelector,
+  reduxCheckedIndexesSelector,
   deleteMarkedItem,
 } from 'models/tableData'
 
 import DeleteButton from './DeleteButton.jsx'
 
 export default connect(state=> ({
-  reduxChekedIndexes: reduxChekedIndexesSelector(state),  
+  reduxCheckedIndexes: reduxCheckedIndexesSelector(state),
 }), {
   deleteMarkedItem,
 })(DeleteButton)

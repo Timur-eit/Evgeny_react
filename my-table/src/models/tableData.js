@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 import { addCookie, getCookie } from '../cookie'
+import isInputInData from "../shared/utils/search";
 
 // Constants
 
@@ -9,8 +10,9 @@ const prefix = moduleName
 export const GET_TABLE_DATA = `${prefix}/GET_TABLE_DATA`
 export const SORT_TABLE = `${prefix}/SORT_TABLE`
 export const ADD_NEW_TABLE_DATA = `${prefix}/ADD_NEW_TABLE_DATA`
-export const SET_CHEKED_INDEX = `${prefix}/SET_CHEKED_INDEX`
-export const SET_ALL_CHEKED_INDEXES = `${prefix}/SET_ALL_CHEKED_INDEXES`
+export const CORRECT_TABLE_DATA = `${prefix}/CORRECT_TABLE_DATA`
+export const SET_CHECKED_INDEX = `${prefix}/SET_CHECKED_INDEX`
+export const SET_ALL_CHECKED_INDEXES = `${prefix}/SET_ALL_CHECKED_INDEXES`
 export const DELETE_MARKED_DATA = `${prefix}/DELETE_MARKED_DATA`
 export const FIX_INITIAL_TABLE_DATA = `${prefix}/FIX_INITIAL_TABLE_DATA`
 export const SEARCH = `${prefix}/SEARCH`
@@ -21,7 +23,7 @@ export const CHANGE_MARKED_DATA = `${prefix}/CHANGE_MARKED_DATA`
 
 export const ReducerRecord = {
   reduxTableData: [],
-  reduxChekedIndexes: [],
+  reduxCheckedIndexes: [],
   savedTableData: [],
 }
 
@@ -41,18 +43,23 @@ export default function reducer(state = ReducerRecord, action) {
       return Object.assign({}, state, {
         reduxTableData: payload,
       })
-    case SET_CHEKED_INDEX:
+    case CORRECT_TABLE_DATA:
       return Object.assign({}, state, {
-        reduxChekedIndexes: payload,
+        reduxTableData: payload.reduxTableData,
+        reduxCheckedIndexes: payload.reduxCheckedIndexes,
       })
-    case SET_ALL_CHEKED_INDEXES:
+    case SET_CHECKED_INDEX:
       return Object.assign({}, state, {
-        reduxChekedIndexes: payload,
+        reduxCheckedIndexes: payload,
+      })
+    case SET_ALL_CHECKED_INDEXES:
+      return Object.assign({}, state, {
+        reduxCheckedIndexes: payload,
       })
     case DELETE_MARKED_DATA:
       return Object.assign({}, state, {
         reduxTableData: payload.reduxTableData,
-        reduxChekedIndexes: payload.reduxChekedIndexes,
+        reduxCheckedIndexes: payload.reduxCheckedIndexes,
       })
     case FIX_INITIAL_TABLE_DATA:
       return Object.assign({}, state, {
@@ -66,7 +73,7 @@ export default function reducer(state = ReducerRecord, action) {
     case CHANGE_MARKED_DATA:
       return Object.assign({}, state, {
         reduxTableData: payload.reduxTableData,
-        reduxChekedIndexes: payload.reduxChekedIndexes,
+        reduxCheckedIndexes: payload.reduxCheckedIndexes,
       })
     default:
       return state
@@ -77,13 +84,13 @@ export default function reducer(state = ReducerRecord, action) {
 
 export const stateSelector = state => state[moduleName]
 export const reduxTableDataSelector = createSelector(stateSelector, state => state.reduxTableData)
-export const reduxChekedIndexesSelector = createSelector(stateSelector, state => state.reduxChekedIndexes)
+export const reduxCheckedIndexesSelector = createSelector(stateSelector, state => state.reduxCheckedIndexes)
 export const savedTableDataSelector = createSelector(stateSelector, state => state.savedTableData)
 
 // Action creators
 
 export function getReduxTableData() {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     let newReduxTableData = []
     // const { query } = getState()['router'].location
     // console.log(query)
@@ -123,20 +130,6 @@ export function sortReduxTable(field, direction) { // direction: one of [1, -1]
   }
 }
 
-// export function addNewTableData() {
-//   return (dispatch, getState) => {
-//     const { reduxTableData } = getState()[moduleName]
-//     const { reduxInputsData } = getState()['app-form']
-//     const newTableData = [...reduxTableData].concat([reduxInputsData])
-//     addCookie('table', JSON.stringify(newTableData))
-
-//     dispatch({
-//       type: ADD_NEW_TABLE_DATA,
-//       payload: newTableData,
-//     })
-//   }
-// }
-
 export function addNewTableData(fieldsNames, formData) {
   return (dispatch, getState) => {
     const { reduxTableData } = getState()[moduleName]
@@ -163,18 +156,46 @@ export function addNewTableData(fieldsNames, formData) {
   }
 }
 
-export function setChekedItemIndex(itemIndex) {
+export function correctTableData(formData) {
+  console.log('redux submit')
+  
   return (dispatch, getState) => {
-    const { reduxChekedIndexes } = getState()[moduleName]
-    let newChekedIndexes = []
-    if (reduxChekedIndexes.includes(itemIndex)) {
-      newChekedIndexes = reduxChekedIndexes.filter(item => item !== itemIndex)
+    const { reduxTableData } = getState()[moduleName]
+    const currentId = formData.id
+    // const currentTableItem = { ...reduxTableData.filter(item => item.id === currentId) }
+    const newCurrentTableItem = { id: currentId, ...formData}
+    
+    const currentItemIndex = reduxTableData.findIndex(item => item.id === currentId)
+    const newTableData = [...reduxTableData]
+    newTableData[currentItemIndex] = {...newCurrentTableItem}
+  
+    console.log(newTableData)
+    
+    // console.log(currentItemIndex)
+    // console.log(formData)
+    // console.log(currentTableItem)
+    // console.log(newCurrentTableItem)
+    dispatch({
+      type: CORRECT_TABLE_DATA,
+      payload: { reduxTableData: newTableData, reduxCheckedIndexes: [] }
+    })
+  }
+}
+
+
+
+export function setCheckedItemIndex(itemIndex) {
+  return (dispatch, getState) => {
+    const { reduxCheckedIndexes } = getState()[moduleName]
+    let newCheckedIndexes
+    if (reduxCheckedIndexes.includes(itemIndex)) {
+      newCheckedIndexes = reduxCheckedIndexes.filter(item => item !== itemIndex)
     } else {
-      newChekedIndexes = [...reduxChekedIndexes, itemIndex]
+      newCheckedIndexes = [...reduxCheckedIndexes, itemIndex]
     }
     dispatch({
-      type: SET_CHEKED_INDEX,
-      payload: newChekedIndexes
+      type: SET_CHECKED_INDEX,
+      payload: newCheckedIndexes
     })
   }
 }
@@ -182,17 +203,17 @@ export function setChekedItemIndex(itemIndex) {
 export function setAllItemsCheked() {
   return (dispatch, getState) => {
     const { reduxTableData } = getState()[moduleName]
-    const { reduxChekedIndexes } = getState()[moduleName]
-    const allItemsIndexe = [...reduxTableData].map((item, i) => item = i)
-    let newReduxChekedIndexes = []
-    if (reduxChekedIndexes.length === reduxTableData.length) {
-      newReduxChekedIndexes = []
+    const { reduxCheckedIndexes } = getState()[moduleName]
+    const allItemsIndexes = [...reduxTableData].map((_, i) => i)
+    let newReduxCheckedIndexes
+    if (reduxCheckedIndexes.length === reduxTableData.length) {
+      newReduxCheckedIndexes = []
     } else {
-      newReduxChekedIndexes = allItemsIndexe
+      newReduxCheckedIndexes = allItemsIndexes
     }
     dispatch({
-      type: SET_ALL_CHEKED_INDEXES,
-      payload: newReduxChekedIndexes,
+      type: SET_ALL_CHECKED_INDEXES,
+      payload: newReduxCheckedIndexes,
     })
   }
 }
@@ -200,13 +221,13 @@ export function setAllItemsCheked() {
 export function deleteMarkedItem() {
   return (dispatch, getState) => {
     const { reduxTableData } = getState()[moduleName]
-    const { reduxChekedIndexes } = getState()[moduleName]
+    const { reduxCheckedIndexes } = getState()[moduleName]
     // eslint-disable-next-line array-callback-return
-    const newTableData = [...reduxTableData].filter((_, i) => !reduxChekedIndexes.includes(i))
-    const newreduxChekedIndexes = []
+    const newTableData = [...reduxTableData].filter((_, i) => !reduxCheckedIndexes.includes(i))
+    const newReduxCheckedIndexes = []
     dispatch({
       type: DELETE_MARKED_DATA,
-      payload: { reduxTableData: newTableData, reduxChekedIndexes: newreduxChekedIndexes }
+      payload: { reduxTableData: newTableData, reduxCheckedIndexes: newReduxCheckedIndexes }
     })
   }
 }
@@ -217,10 +238,7 @@ export function fixInitialTableData() {
     const { reduxTableData } = getState()[moduleName]
     const { savedTableData } = getState()[moduleName]
 
-    let newSavedData = []
-
-    console.log('length of savedTableData ' + savedTableData.length)
-
+    let newSavedData
     if (savedTableData.length < 1) {
       newSavedData = [...reduxTableData]
     } else {
@@ -235,16 +253,14 @@ export function fixInitialTableData() {
 }
 
 export function search(event) {
-  // fixInitialTableData() нельзя вызвать экшн отсюда
   return (dispatch, getState) => {
     const { value } = event.target
     const { reduxTableData } = getState()[moduleName]
     const { savedTableData } = getState()[moduleName]
-    let resultData = null
+    let resultData
     let newSavedData = [...savedTableData]
 
     if (value.length > 0) {
-      // eslint-disable-next-line array-callback-return
       resultData = [...reduxTableData].filter(item => {
         let result = null
         for (const key in item) {
@@ -262,42 +278,6 @@ export function search(event) {
     dispatch({
       type: SEARCH,
       payload: { reduxTableData: resultData, savedTableData: newSavedData }
-    })
-  }
-}
-
-function isInputInData(input, data) {
-  const dataToText = data.toString().toLowerCase()
-  const inputToText = input.toString().toLowerCase()
-  let i = 0
-
-  for (const char of dataToText) {
-    if (char === inputToText[0]) {
-      if (inputToText === dataToText.slice(i, i + inputToText.length)) {
-        return true
-      } else {
-        return false
-      }
-    }
-    i++
-  }
-  return false
-}
-
-
-export function changeMarkedTableData(id, field, newFieldData ) {
-  return (dispatch, getState) => {
-    const { reduxTableData } = getState()[moduleName]    
-    // const { reduxChekedIndexes } = getState()[moduleName]    
-
-    let newReduxTableData = [...reduxTableData]    
-    newReduxTableData[id][field] = newFieldData
-    // console.log('id ' + id)
-    // console.log('field ' + field)
-    // console.log('newData ' + newFieldData)   
-    dispatch({
-      type: CHANGE_MARKED_DATA,
-      payload: { reduxTableData: newReduxTableData, reduxChekedIndexes: []}
     })
   }
 }

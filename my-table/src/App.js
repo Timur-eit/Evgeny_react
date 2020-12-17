@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import 'App.css';
 import Table from 'components/table';
-import Modal from './UI/Modal'
-// import Forms from './UI/forms'
-import DeleteButton from './components/deleteButton'
-import SearchField from './components/searchField'
-import ReduxFormsExample from './components/ReduxForms'
+import Modal from 'shared/ui/Modal'
+import DeleteButton from 'components/deleteButton'
+import SearchField from 'components/searchField'
+import AddNewDataForms from 'components/AddNewDataForms'
 import { connect } from 'react-redux'
 import { Route, Switch, Link } from 'react-router-dom'
 
@@ -15,8 +14,8 @@ import {
   sortReduxTable,
   addNewTableData,
   search,
-  reduxChekedIndexesSelector,
-  setChekedItemIndex,
+  reduxCheckedIndexesSelector,
+  setCheckedItemIndex,
   setAllItemsCheked,  
 } from './models/tableData'
 
@@ -29,10 +28,10 @@ function App({
   getReduxTableData,
   sortReduxTable,
   addNewTableData,
-  reduxChekedIndexes,
-  setChekedItemIndex,
+  reduxCheckedIndexes,
+  setCheckedItemIndex,
   setAllItemsCheked,  
-  // location,
+  location,
 }) {
 
   useEffect(() => {
@@ -52,8 +51,8 @@ function App({
               <Table
                 data={reduxTableData}
                 columns={tableColumns}
-                checkboxHandle={setChekedItemIndex}
-                chekedItemIndexs={reduxChekedIndexes}
+                checkboxHandle={setCheckedItemIndex}
+                checkedItemIndexes={reduxCheckedIndexes}
                 checkAllCheckboxes={setAllItemsCheked}
                 handleSort={sortReduxTable}
               />
@@ -61,10 +60,10 @@ function App({
                 disableEnforceFocus={true} // ???
                 children={<div>Hello Moto</div>}
               />
-              {/* <ReduxFormsExample initialData={location.query} onSubmit={(data) => addNewTableData(tableColumns, data)} /> */}
-              <ReduxFormsExample onSubmit={(data) => addNewTableData(tableColumns, data)} />
+              {/*<AddNewDataForms onSubmit={(data) => addNewTableData(tableColumns, data)} />*/}
+              <AddNewDataForms initialData={location.query} onSubmit={(data) => addNewTableData(tableColumns, data)} />
             </div>
-          </Route>          
+          </Route>
           <Route exact path='/'>
             <p>Please choose link</p>
           </Route>
@@ -80,13 +79,13 @@ function App({
 
 export default connect(state => ({
   reduxTableData: reduxTableDataSelector(state),
-  reduxChekedIndexes: reduxChekedIndexesSelector(state),
-  // location: state.router.location, 
+  reduxCheckedIndexes: reduxCheckedIndexesSelector(state),
+  location: state.router.location,
 }), {
   getReduxTableData,
   sortReduxTable,
   addNewTableData,
-  setChekedItemIndex,
+  setCheckedItemIndex,
   setAllItemsCheked,
   search,
 })(App)

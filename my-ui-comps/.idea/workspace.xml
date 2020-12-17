@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e38629a8-2e00-4651-9637-71eba76b9c9a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../my-table/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/.idea/my-table.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/jsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/AddNewDataForms/index.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/CorrectDataForms/CorrectDataForm.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/CorrectDataForms/RemoteSubmit.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/CorrectDataForms/submit.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/searchField/SearchField.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/table/Table.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/shared/utils/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/my-ui-comps.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/UI/Modal/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/shared/ui/Modal/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/UI/Modal/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/shared/ui/Modal/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/UI/forms/forms-model.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/shared/ui/forms/forms-model.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/UI/forms/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/shared/ui/forms/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/ReduxForms/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/deleteButton/DeleteButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/deleteButton/DeleteButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/deleteButton/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/deleteButton/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/searchField/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/searchField/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/table/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/table/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/table/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/CorrectDataForms/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/models/tableData.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/models/tableData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/redux/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/redux/reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1li23p8gvw91OUlNy4yej3m6lsw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e38629a8-2e00-4651-9637-71eba76b9c9a" name="Default Changelist" comment="" />
+      <created>1608065394741</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608065394741</updated>
+      <workItem from="1608065396265" duration="2597000" />
+      <workItem from="1608126416055" duration="671000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

@@ -1,24 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form'
-import { connect } from 'react-redux'
+// import { connect } from 'react-redux'
 
 const inputs = ['name', 'class', 'author', 'version']
 
-let ReduxFormsExample = ({
+let AddNewDataForms = ({
   handleSubmit,
   initialize,
   initialData,
-  // reduxInputsData,
-  // inputDataChange,
-  // setInitialFields,
-  // submit,
-  // addNewTableData,
-
 }) => {
 
-  // useEffect(() => {
-  //   initialize(initialData)
-  // }, [initialize, initialData])
+  useEffect(() => {
+    initialize(initialData)
+  }, [initialize, initialData])
 
   return (
     <>
@@ -35,14 +29,14 @@ let ReduxFormsExample = ({
   )
 }
 
-ReduxFormsExample = reduxForm({
-  form: 'reduxFormExample',
-})(ReduxFormsExample)
+export default AddNewDataForms = reduxForm({
+  form: 'addNewDataForm',
+})(AddNewDataForms)
 
-ReduxFormsExample = connect(
-  state => ({
-    initialValues: state.router.location.query
-  })
-)(ReduxFormsExample)
+// AddNewDataForms = connect(
+//   state => ({
+//     initialValues: state.router.location.query
+//   })
+// )(AddNewDataForms)
 
-export default ReduxFormsExample
+// export default AddNewDataForms
