@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import CorrectDataForm from 'components/CorrectDataForms/CorrectDataForm'
-import RemoteSubmitButton from 'components/CorrectDataForms/RemoteSubmit'
+// import RemoteSubmitButton from 'components/CorrectDataForms/RemoteSubmit'
+import './reset.scss'
+import './style.scss'
 
 export const Table = ({
   columns,
@@ -16,14 +18,12 @@ export const Table = ({
 }) => {
   
   return(
+    <>
     <table border="1">
       <thead>
         <tr>
           {columns.map((item, i) => {
-            if (item === 'isChecked') {
-              return <th key={i}>{`${item}`} <button onClick={() => checkAllCheckboxes()}>Check all</button></th>
-            } else {
-              return <th key={i}>{`${item}`}
+              return <th key={i}>
                 <SortButton
                   arrowDisplayState={arrowId}
                   field={item}
@@ -32,9 +32,10 @@ export const Table = ({
                     arrowId ? handleSort(item, 1) : handleSort(item, -1)
                   }}
                 />
+                {`${item}`}
               </th>
             }
-          })}
+          )}
         </tr>
       </thead>
       
@@ -46,7 +47,7 @@ export const Table = ({
                 if (cell === 'isChecked') {
                   return <td key={key}>
                     <input id="checkbox" checked={ checkedItemIndexes.includes(i) } type="checkbox" onChange={() => checkboxHandle(i)}/>
-                    {checkedItemIndexes.includes(i) ? <RemoteSubmitButton /> : null }
+                    {/*{checkedItemIndexes.includes(i) ? <RemoteSubmitButton /> : null }*/}
                   </td>
                 } else {
                   return <td key={key}>{
@@ -58,6 +59,9 @@ export const Table = ({
         ) : null}
       </tbody>
     </table>
+    
+    {/*<div><RemoteSubmitButton /></div>*/}
+  </>
   )
 }
 
@@ -67,7 +71,7 @@ const SortButton = ({
   field,
   }) => {
   return (
-    <span onClick={onClick}>{arrowDisplayState === field ? '↑' : '↓'}</span>
+    <span onClick={onClick}>{arrowDisplayState === field ? <>&#9650;</> : <>&#9660;</>}</span>
   );
 }
 

@@ -1,0 +1,24 @@
+.new-data-forms {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 30px;
+
+  .field {
+    width: 100px;
+    height: 25px;
+    border: 2px solid black;
+    padding: 0 3px;
+  }
+
+  .submit-button {
+    width: 200px;
+    background-color: #ffd683;
+    border: 2px solid black;
+    border-radius: 6px;
+  }
+
+  .submit-button:hover {
+    cursor: pointer;
+  }
+}

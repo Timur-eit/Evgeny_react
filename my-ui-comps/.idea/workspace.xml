@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e38629a8-2e00-4651-9637-71eba76b9c9a" name="Default Changelist" comment="" />
+    <list default="true" id="e38629a8-2e00-4651-9637-71eba76b9c9a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../my-table/src/App.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/AddNewDataForms/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/table/reset.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/table/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/reset.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/AddNewDataForms/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/AddNewDataForms/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/deleteButton/DeleteButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/deleteButton/DeleteButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/searchField/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/searchField/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/table/Table.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/cookie.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/shared/utils/cookie.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/models/tableData.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/models/tableData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

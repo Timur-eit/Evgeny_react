@@ -1,12 +1,10 @@
 import React from 'react';
-import 'App.css';
+import './style.scss'
 
 function DeleteButton({ reduxCheckedIndexes, deleteMarkedItem }) {
   return (
     <div>
-      {reduxCheckedIndexes && reduxCheckedIndexes.length ? (
-        <button className='deleteButton' onClick={() => deleteMarkedItem()}>Delete data</button>
-      ) : null}
+      <button className='delete-button' disabled={reduxCheckedIndexes.length < 1} onClick={() => deleteMarkedItem()}>Удалить</button>
     </div>
   )
 }

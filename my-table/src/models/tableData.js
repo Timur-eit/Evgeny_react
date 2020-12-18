@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
-import { addCookie, getCookie } from '../cookie'
-import isInputInData from "../shared/utils/search";
+import { addCookie, getCookie } from 'shared/utils/cookie'
+import isInputInData from "shared/utils/search";
 
 // Constants
 

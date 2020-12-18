@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form'
-import './style.css'
 import { correctTableData } from 'models/tableData'
+import './style.scss'
 
 let CorrectDataForm = ({
   handleSubmit,

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Field, reduxForm } from 'redux-form'
-// import { connect } from 'react-redux'
+import './style.scss'
 
 const inputs = ['name', 'class', 'author', 'version']
 
@@ -16,14 +16,12 @@ let AddNewDataForms = ({
 
   return (
     <>
-      <p>Please input and submit to add new data</p>
-      <form onSubmit={handleSubmit}>
+      <form className='new-data-forms' onSubmit={handleSubmit}>
         {inputs.map((item, key) =>
           <div key={key}>
-            <label htmlFor={item}>{item}</label>            
-            <Field name={item} component='input' type='text' />            
+            <Field className='field' name={item} component='input' type='text' placeholder={`enter ${item}`} />
           </div>)}
-        <button type="submit">Submit data</button>
+        <button className='submit-button' type="submit">Добавить</button>
       </form>
     </>
   )
