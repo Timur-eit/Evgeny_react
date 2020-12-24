@@ -1,20 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { submit } from "redux-form";
+import { submit } from 'redux-form';
 import { reduxCheckedIndexesSelector } from 'models/tableData'
 import './style.scss'
+import searchImg from 'shared/img/edit-text-svgrepo-com.svg'
 
-const RemoteSubmitButton = ({ dispatch, reduxCheckedIndexes }) => (
-    <button className='correct-button' disabled={reduxCheckedIndexes.length < 1}
+const RemoteSubmitButton = ({ submit, reduxCheckedIndexes }) => (
+    <button className='correct-button' disabled={reduxCheckedIndexes.length < 1}    
       type="button"
-      onClick={() => dispatch(submit('correctDataForm'))}
+      onClick={() => submit('correctDataForm')}
     >
-      Редактировать
+      <img src={searchImg} alt='поиск' />
+      <span>Редактировать</span>
     </button>
 )
 
-export default connect(state => ({
+export default connect(
+  state => ({
   reduxCheckedIndexes: reduxCheckedIndexesSelector(state),
 }), {
-  // submit,
+  submit,
 })(RemoteSubmitButton)

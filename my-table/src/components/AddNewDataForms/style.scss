@@ -1,24 +1,62 @@
 .new-data-forms {
-  display: flex;
   width: 100%;
-  justify-content: space-between;
   margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
 
   .field {
-    width: 100px;
-    height: 25px;
-    border: 2px solid black;
-    padding: 0 3px;
-  }
+    max-width: 250px;  
 
-  .submit-button {
-    width: 200px;
+    input {
+      width: 75%;
+      border: 2px solid black;
+      height: 30px;
+      padding: 0 5px;      
+    }
+  }
+}
+
+.submit-button {
+  background-color: #ffd683;
+  width: 150px;
+  border: none;  
+  display: inline-block;
+  height: 41px;
+  margin-left: 20px;
+  position: relative;
+  line-height: 2.5em;
+  padding-left: 2em;
+  padding-right: 2em;
+  border-radius: 3px 6px 6px 3px;
+  border-right: 2px solid black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  // z-index: 1;
+
+  &::before {
+    content: "";
+    height: 40px;
+    width: 40px;
     background-color: #ffd683;
-    border: 2px solid black;
-    border-radius: 6px;
+    position: absolute;
+    margin-left: -20px;
+    left: 0;
+    top: -3px;
+    transform: rotate(45deg) scale(0.7);
+    border-left: 3px solid black;
+    border-bottom: 3px solid black;
+    border-radius: 6px 0 6px 6px;
+    // z-index: -1;
+    box-shadow: 0 0 0 0 black;
+    outline: none;
   }
+}
 
-  .submit-button:hover {
-    cursor: pointer;
-  }
+.submit-button:hover {
+  cursor: pointer;
+}
+
+.submit-button:disabled {
+  cursor: unset;
 }

@@ -1,14 +1,9 @@
 import React, { useEffect } from 'react';
 import Table from 'components/table';
-import Modal from 'shared/ui/Modal'
-import DeleteButton from 'components/deleteButton'
-// import SearchFieldContatiner from 'components/searchField'
+// import Modal from 'shared/ui/Modal'
 import AddNewDataForms from 'components/AddNewDataForms'
 import { connect } from 'react-redux'
 import { Route, Switch, Link } from 'react-router-dom'
-
-import RemoteSubmitButton from 'components/CorrectDataForms/RemoteSubmit'
-
 import ControlPanel from "components/ControlPanel/ControlPanel";
 
 import 'reset.scss'
@@ -23,6 +18,7 @@ import {
   reduxCheckedIndexesSelector,
   setCheckedItemIndex,
   setAllItemsCheked,
+  fixInitialTableData,
   // correctTableData,
 } from './models/tableData'
 
@@ -37,24 +33,32 @@ function App({
   addNewTableData,
   reduxCheckedIndexes,
   setCheckedItemIndex,
-  setAllItemsCheked,  
+  setAllItemsCheked,
+  search,
+  fixInitialTableData,
   location,
   // correctTableData,
 }) {
-  
-  console.log(process.env)
-  
+
+  const searchParamValue = location.query.search
+
   useEffect(() => {
     getReduxTableData()
-  }, [getReduxTableData])
+    if (searchParamValue) {
+      const event = { target: { value: searchParamValue } }
+      fixInitialTableData()
+      search(event)
+    }
+
+  }, [getReduxTableData, fixInitialTableData, search, searchParamValue])
 
 
   return (
     <div className="App">
-      <Link to='/table'>Table</Link>
+      <Link to='/table'>Языкы программирования</Link>
       <Switch>
         <Route path='/table'>
-          <AddNewDataForms initialData={location.query} onSubmit={(data) => addNewTableData(tableColumns, data)} />
+          <AddNewDataForms initialData={location.query} disabledState={searchParamValue} onSubmit={(data) => addNewTableData(tableColumns, data)} />
           <Table
             data={reduxTableData}
             columns={tableColumns}
@@ -90,5 +94,6 @@ export default connect(state => ({
   addNewTableData,
   setCheckedItemIndex,
   setAllItemsCheked,
+  fixInitialTableData,
   search,
 })(App)

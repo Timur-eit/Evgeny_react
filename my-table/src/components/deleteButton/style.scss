@@ -1,5 +1,19 @@
 .delete-button {
-  background: url("../../shared/img/cross-svgrepo-com.svg") 5% no-repeat;
-  background-size: contain;
-  padding-left: 30px;
+  display: flex;  
+  align-items: center;
+  
+  img {  
+    width: 15px;
+    height: 15px;    
+  }  
+
+  span {
+    margin: 0 5px;
+  }
+
+  &:disabled {
+    img {
+      filter: opacity(0.2);
+    }
+  } 
 }

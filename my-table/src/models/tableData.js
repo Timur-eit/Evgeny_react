@@ -157,7 +157,7 @@ export function addNewTableData(fieldsNames, formData) {
 }
 
 export function correctTableData(formData) {
-  console.log('redux submit')
+  // console.log('redux submit')
   
   return (dispatch, getState) => {
     const { reduxTableData } = getState()[moduleName]
@@ -169,7 +169,7 @@ export function correctTableData(formData) {
     const newTableData = [...reduxTableData]
     newTableData[currentItemIndex] = {...newCurrentTableItem}
   
-    console.log(newTableData)
+    // console.log(newTableData)
     
     // console.log(currentItemIndex)
     // console.log(formData)
@@ -234,7 +234,7 @@ export function deleteMarkedItem() {
 
 export function fixInitialTableData() {
   return (dispatch, getState) => {
-    console.log('invoke inner fixInitialTableData')
+    // console.log('invoke inner fixInitialTableData')
     const { reduxTableData } = getState()[moduleName]
     const { savedTableData } = getState()[moduleName]
 
@@ -253,8 +253,14 @@ export function fixInitialTableData() {
 }
 
 export function search(event) {
+  
+  
+
   return (dispatch, getState) => {
     const { value } = event.target
+
+    console.log('VALUE ' + value)
+
     const { reduxTableData } = getState()[moduleName]
     const { savedTableData } = getState()[moduleName]
     let resultData

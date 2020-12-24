@@ -8,6 +8,7 @@ let AddNewDataForms = ({
   handleSubmit,
   initialize,
   initialData,
+  disabledState
 }) => {
 
   useEffect(() => {
@@ -18,10 +19,12 @@ let AddNewDataForms = ({
     <>
       <form className='new-data-forms' onSubmit={handleSubmit}>
         {inputs.map((item, key) =>
-          <div key={key}>
-            <Field className='field' name={item} component='input' type='text' placeholder={`enter ${item}`} />
+          <div className='field' key={key}>
+            <Field name={item} component='input' type='text' placeholder={`enter ${item}`} />
           </div>)}
-        <button className='submit-button' type="submit">Добавить</button>
+        <button className='submit-button' type="submit" disabled={disabledState}>
+          Добавить
+        </button>
       </form>
     </>
   )

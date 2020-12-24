@@ -1,54 +1,27 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form'
-// import { useLocation } from 'react-router-dom'
-
 import './style.scss'
-// import 'App.scss';
+import searchImg from 'shared/img/search-svgrepo-com.svg'
 
-let SearchField = ({ search, fixInitialTableData, history, initialValues }) => {
-  
-  // const useQuery = () => new URLSearchParams(useLocation().search)
-  // const setQuery = useQuery()
-  
-  const [showSearchFieldState, setShowSearchFieldState] = useState(false)
-  
-  const searchInput = useRef(null)
-  
-  useEffect(() => {
-    if (initialValues && initialValues.search) {
-      console.log(searchInput)
-      const event = { target: { value: initialValues.search } }
-      console.log(event)
-      fixInitialTableData()
-      search(event)
-      
-    }
-  }, [initialValues, search, fixInitialTableData])
-  
+let SearchField = ({ search, fixInitialTableData, history, initialValues }) => {  
+
   function changeHandler(event) {
     fixInitialTableData()
     search(event)
     const { value } = event.target
-    
+
     if (value.length > 0) {
       history.push({ search: `?search=${value}` })
     } else {
       history.push({ search: '' })
     }
-    // setQuery.set('search', value)
-    // console.log(setQuery.get('search'))
-    // window.location.search = `?${value}`
-    // console.log(initialValues)
   }
-  
+
   return (
-    <div>
-      {showSearchFieldState && <label>
-        <Field name={'search'} ref={searchInput} component='input' type='text' onChange={(event) => changeHandler(event)}/>
-      </label>}
-      <button className='sear-button' onClick={() => setShowSearchFieldState(state => !state)}>
-        Найти
-      </button>
+    <div className='search-field'>
+      <img src={searchImg} alt='Поиск'/>
+      <span>Найти</span>
+      <Field name={'search'} component='input' type='text' onChange={(event) => changeHandler(event)} placeholder={'enter text'}/>
     </div>
   )
 }
@@ -59,3 +32,21 @@ SearchField = reduxForm({
 })(SearchField)
 
 export default SearchField
+
+
+// const useQuery = () => new URLSearchParams(useLocation().search)
+  // const setQuery = useQuery()
+
+    // setQuery.set('search', value)
+    // console.log(setQuery.get('search'))
+    // window.location.search = `?${value}`
+    // console.log(initialValues)
+
+
+  // useEffect(() => {
+  //   if (initialValues && initialValues.search) {
+  //     const event = { target: { value: initialValues.search } }
+  //     fixInitialTableData()
+  //     search(event)
+  //   }
+  // }, [initialValues

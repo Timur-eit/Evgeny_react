@@ -11,7 +11,7 @@ export const Table = ({
   handleSort,
   checkboxHandle,
   checkedItemIndexes,
-  checkAllCheckboxes,
+  // checkAllCheckboxes,
   arrowId,
   changeArrowId,
   correctTableData,

@@ -1,7 +1,23 @@
-.control-panel {
-  width: 100%;
+.control-panel {  
+  width: 30%;
   margin-top: 40px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
+
+  > * {
+    margin-bottom: 10px;
+  }
+  
+  button {
+    height: 30px;
+    border-radius: 6px;
+  }
+}
+
+@media screen and (min-width: 880px) {
+  .control-panel {
+    width: 60%;
+    flex-direction: row;
+  }
 }
