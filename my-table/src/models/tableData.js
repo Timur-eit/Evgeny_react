@@ -158,23 +158,19 @@ export function addNewTableData(fieldsNames, formData) {
 
 export function correctTableData(formData) {
   // console.log('redux submit')
-  
+
   return (dispatch, getState) => {
     const { reduxTableData } = getState()[moduleName]
     const currentId = formData.id
     // const currentTableItem = { ...reduxTableData.filter(item => item.id === currentId) }
     const newCurrentTableItem = { id: currentId, ...formData}
-    
+
     const currentItemIndex = reduxTableData.findIndex(item => item.id === currentId)
     const newTableData = [...reduxTableData]
     newTableData[currentItemIndex] = {...newCurrentTableItem}
-  
-    // console.log(newTableData)
-    
-    // console.log(currentItemIndex)
-    // console.log(formData)
-    // console.log(currentTableItem)
-    // console.log(newCurrentTableItem)
+
+    addCookie('table', JSON.stringify(newTableData))
+
     dispatch({
       type: CORRECT_TABLE_DATA,
       payload: { reduxTableData: newTableData, reduxCheckedIndexes: [] }
@@ -225,6 +221,9 @@ export function deleteMarkedItem() {
     // eslint-disable-next-line array-callback-return
     const newTableData = [...reduxTableData].filter((_, i) => !reduxCheckedIndexes.includes(i))
     const newReduxCheckedIndexes = []
+    
+    addCookie('table', JSON.stringify(newTableData))
+    
     dispatch({
       type: DELETE_MARKED_DATA,
       payload: { reduxTableData: newTableData, reduxCheckedIndexes: newReduxCheckedIndexes }
@@ -233,8 +232,7 @@ export function deleteMarkedItem() {
 }
 
 export function fixInitialTableData() {
-  return (dispatch, getState) => {
-    // console.log('invoke inner fixInitialTableData')
+  return (dispatch, getState) => {    
     const { reduxTableData } = getState()[moduleName]
     const { savedTableData } = getState()[moduleName]
 
@@ -253,14 +251,8 @@ export function fixInitialTableData() {
 }
 
 export function search(event) {
-  
-  
-
   return (dispatch, getState) => {
-    const { value } = event.target
-
-    console.log('VALUE ' + value)
-
+    const { value } = event.target    
     const { reduxTableData } = getState()[moduleName]
     const { savedTableData } = getState()[moduleName]
     let resultData

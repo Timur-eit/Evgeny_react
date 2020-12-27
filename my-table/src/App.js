@@ -71,13 +71,13 @@ function App({
           {/*  disableEnforceFocus={true} // ???*/}
           {/*  children={<div>Hello Moto</div>}*/}
           {/*/>*/}
-          <ControlPanel />
+          <ControlPanel className='control-panel'/>
         </Route>
         <Route exact path='/'>
         </Route>
         <Route path='*'>
-          404
-          Doesn't exist
+          Code 404<br />
+          Not found or doesn't exist :-(
         </Route>
       </Switch>
     </div>

@@ -2,19 +2,21 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 import './style.scss'
 import searchImg from 'shared/img/search-svgrepo-com.svg'
+import { queryStringEditor } from 'shared/utils/queryStringEditor.js'
 
-let SearchField = ({ search, fixInitialTableData, history, initialValues }) => {  
+let SearchField = ({ search, fixInitialTableData, history, initialValues }) => {
 
   function changeHandler(event) {
     fixInitialTableData()
     search(event)
-    const { value } = event.target
+    // const { value } = event.target
 
-    if (value.length > 0) {
-      history.push({ search: `?search=${value}` })
-    } else {
-      history.push({ search: '' })
-    }
+    // if (value.length > 0) {
+    //   history.push({ search: `?search=${value}` })
+    // } else {
+    //   history.push({ search: '' })
+    // }
+    queryStringEditor(event, 'search', history)
   }
 
   return (
