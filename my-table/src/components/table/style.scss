@@ -1,0 +1,41 @@
+table {
+  text-align: left;
+  font-size: 15px;
+  width: 100%;
+
+  thead {
+    background-color: #cccccc;
+  }
+
+  th {
+    padding: 3px;
+    width: 50px;
+
+    > span {
+      display: inline-block;
+      font-size: 10px;
+      margin-right: 5px;
+    }
+
+    > span:hover {
+      cursor: pointer;
+    }
+  }
+
+  tr:nth-last-of-type(2n) {
+    background-color: #ececec;
+  }
+
+  td:last-of-type {
+    text-align: center;
+  }
+
+  td {
+    padding: 5px;
+  }
+
+
+}
+
+
+

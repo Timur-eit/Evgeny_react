@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e38629a8-2e00-4651-9637-71eba76b9c9a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../my-table/src/App.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/AddNewDataForms/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/table/reset.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/components/table/style.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my-table/src/reset.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/AddNewDataForms/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/AddNewDataForms/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/deleteButton/DeleteButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/deleteButton/DeleteButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/searchField/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/searchField/index.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/components/table/Table.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/components/table/Table.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/cookie.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/shared/utils/cookie.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/index.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/src/models/tableData.js" beforeDir="false" afterPath="$PROJECT_DIR$/../my-table/src/models/tableData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my-table/yarn.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1li23p8gvw91OUlNy4yej3m6lsw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e38629a8-2e00-4651-9637-71eba76b9c9a" name="Default Changelist" comment="" />
+      <created>1608065394741</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1608065394741</updated>
+      <workItem from="1608065396265" duration="2597000" />
+      <workItem from="1608126416055" duration="671000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>
