@@ -257,7 +257,7 @@ export function search(event) {
   }
 }
 
-function isInputInData(input, data) {
+export function isInputInData(input, data) {
   const dataToText = data.toString().toLowerCase()
   const inputToText = input.toString().toLowerCase()
   let i = 0
