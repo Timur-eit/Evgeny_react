@@ -4,6 +4,9 @@
 process.env.BABEL_ENV = 'development';
 process.env.NODE_ENV = 'development';
 
+// process.env.VALUE = 'myValue';
+// console.log(process.env)
+
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
 // terminate the Node.js process with a non-zero exit code.
@@ -164,3 +167,4 @@ checkBrowsers(paths.appPath, isInteractive)
     }
     process.exit(1);
   });
+
