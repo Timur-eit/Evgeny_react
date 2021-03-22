@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { addCookie, getCookie } from 'shared/utils/cookie'
+import { addCookie, getCookie } from '../shared/utils/cookie.js'
 
 // Constants
 
