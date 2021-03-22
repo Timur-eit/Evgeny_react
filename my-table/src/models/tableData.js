@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 import { addCookie, getCookie } from '../shared/utils/cookie.js'
+import { isInputInData } from '../shared/utils/search.js'
 
 // Constants
 
@@ -279,20 +280,20 @@ export function search(event) {
   }
 }
 
-export function isInputInData(input, data) {
-  const dataToText = data.toString().toLowerCase()
-  const inputToText = input.toString().toLowerCase()
-  let i = 0
+// export function isInputInData(input, data) {
+//   const dataToText = data.toString().toLowerCase()
+//   const inputToText = input.toString().toLowerCase()
+//   let i = 0
 
-  for (const char of dataToText) {
-    if (char === inputToText[0]) {
-      if (inputToText === dataToText.slice(i, i + inputToText.length)) {
-        return true
-      } else {
-        return false
-      }
-    }
-    i++
-  }
-  return false
-}
+//   for (const char of dataToText) {
+//     if (char === inputToText[0]) {
+//       if (inputToText === dataToText.slice(i, i + inputToText.length)) {
+//         return true
+//       } else {
+//         return false
+//       }
+//     }
+//     i++
+//   }
+//   return false
+// }

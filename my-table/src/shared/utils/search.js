@@ -1,4 +1,4 @@
-function isInputInData(input, data) {
+export function isInputInData(input, data) {
     const dataToText = data.toString().toLowerCase()
     const inputToText = input.toString().toLowerCase()
     let i = 0
@@ -10,5 +10,3 @@ function isInputInData(input, data) {
     }
     return false
 }
-
-export default isInputInData
