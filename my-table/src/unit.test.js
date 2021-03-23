@@ -1,7 +1,7 @@
 import {isInputInData} from './shared/utils/search.js'
 import data from './data/mock'
 
-it('isInputInData has worked', () => { // it or test ?
+it.skip('isInputInData has worked', () => { // it or test ?
   const value = 'Java'
   const firstLine = data()[0]
   const secondLine = data()[1]
