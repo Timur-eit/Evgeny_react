@@ -48,7 +48,7 @@ app.post('/mail', function (req, res) {
   transporter.sendMail(info, (error, test) => {
     if (error) {
       console.log(error)
-      res.sendStatus(500)
+      res.sendStatus(401)
     } else {
       console.log('Email sent: ' + test)
       // res.sendStatus(200)
@@ -56,6 +56,14 @@ app.post('/mail', function (req, res) {
       console.log(req.body)
     }
   })
+})
+
+app.post('*', function (req, res) {
+  res.status(404).send("Endpoint not found")
+})
+
+app.get('*', function (req, res) {
+  res.status(405).send("Method not allowed")
 })
 
 app.listen(port, () => {
