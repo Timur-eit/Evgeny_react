@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 
-describe('check endpoints', () => {
+describe.skip('check endpoints', () => {
   test('data has sent to email', done => {
 
     const data = qs.stringify({
