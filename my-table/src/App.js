@@ -55,7 +55,7 @@ function App({
 
   return (
     <div className="App">
-      <Link to='/table'>Языкы программирования</Link>
+      <Link id='prog-languages' to='/table'>Языкы программирования</Link>
       <Switch>
         <Route path='/table'>
           <AddNewDataForms initialData={location.query} disabledState={searchParamValue} onSubmit={(data) => addNewTableData(tableColumns, data)} />
