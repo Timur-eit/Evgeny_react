@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const path = require('path')
 
 const mode = {
   headless: false,
@@ -48,6 +49,7 @@ describe("smoke tests", () => {
     await page.goto('http://localhost:3000')
     await page.click('#prog-languages')
     const form = await page.$('form')
+    await page.screenshot({path: path.resolve(__dirname, './screens/table.jpeg')})
     const fieldNum = form ? await page.$eval('form', elem => {
       return Array.from(elem.children)
         .map(x => x.className)
@@ -58,4 +60,4 @@ describe("smoke tests", () => {
     expect(fieldNum).toBe(4)
 
   }, 15000)
-})
+}, 50000)

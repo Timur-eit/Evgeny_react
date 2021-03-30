@@ -24,7 +24,7 @@ import {
 
 
 // const inputs = ['name', 'class', 'author', 'version']
-const tableColumns = ['id', 'name', 'class', 'author', 'current version', 'isChecked']
+export const tableColumns = ['id', 'name', 'class', 'author', 'current version', 'isChecked']
 
 function App({
   reduxTableData,

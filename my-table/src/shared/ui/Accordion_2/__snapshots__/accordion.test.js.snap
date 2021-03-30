@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal has rendered correctly 1`] = `
+<div
+  className="accordion"
+>
+  <div>
+    <div
+      className="according__title"
+      onClick={[Function]}
+    >
+      <div>
+        name
+      </div>
+      <img
+        alt=""
+        className="arrow-down"
+        height={10}
+        src="up-arrow.svg"
+        width={10}
+      />
+    </div>
+    <div
+      className="accordion__content"
+    />
+  </div>
+</div>
+`;
+
+exports[`Modal has rendered correctly: <div
+  className="accordion"
+>
+  <div>
+    <div
+      className="according__title"
+      onClick={[Function]}
+    >
+      <div>
+        name
+      </div>
+      <img
+        alt=""
+        className="arrow-down"
+        height={10}
+        src="up-arrow.svg"
+        width={10}
+      />
+    </div>
+    <div
+      className="accordion__content"
+    />
+  </div>
+</div> 1`] = `
+<div
+  className="accordion"
+>
+  <div>
+    <div
+      className="according__title"
+      onClick={[Function]}
+    >
+      <div>
+        name
+      </div>
+      <img
+        alt=""
+        className="arrow-down"
+        height={10}
+        src="up-arrow.svg"
+        width={10}
+      />
+    </div>
+    <div
+      className="accordion__content"
+    />
+  </div>
+</div>
+`;

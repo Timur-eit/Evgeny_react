@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import CorrectDataForm from 'components/CorrectDataForms/CorrectDataForm'
+import CorrectDataForm from '../CorrectDataForms/CorrectDataForm'
 // import RemoteSubmitButton from 'components/CorrectDataForms/RemoteSubmit'
 import './reset.scss'
 import './style.scss'
