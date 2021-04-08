@@ -11,12 +11,19 @@ let AddNewDataForms = ({
   handleSubmit,
   initialize,
   initialData,
-  disabledState,
   history
 }) => {
 
   // console.log('initData ' + JSON.stringify(initialData))
-  // console.log(history)
+  console.log(history)
+  
+  function searchParamMatch() {
+    const searchString = history.location.search
+    const match = inputs.filter(fieldName => searchString.includes(fieldName))
+    return match.length
+  }
+
+
 
   useEffect(() => {
     initialize(initialData)
@@ -24,12 +31,13 @@ let AddNewDataForms = ({
 
   return (
     <>
+      {/* <form className='new-data-forms' onSubmit={handleSubmit}> */}
       <form className='new-data-forms' onSubmit={handleSubmit}>
         {inputs.map((item, key) =>
           <div className='field' key={key}>
             <Field name={item} component='input' type='text' placeholder={`enter ${item}`} onChange={(event) => queryStringEditor(event, item, history)} />
           </div>)}
-        <button className='submit-button' type="submit" disabled={disabledState}>
+        <button className='submit-button' type="submit" disabled={!searchParamMatch()}>
           Добавить
         </button>
       </form>

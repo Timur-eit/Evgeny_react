@@ -58,7 +58,7 @@ function App({
       <Link id='prog-languages' to='/table'>Языкы программирования</Link>
       <Switch>
         <Route path='/table'>
-          <AddNewDataForms initialData={location.query} disabledState={searchParamValue} onSubmit={(data) => addNewTableData(tableColumns, data)} />
+          <AddNewDataForms initialData={location.query} onSubmit={(data) => addNewTableData(tableColumns, data)} />
           <Table
             data={reduxTableData}
             columns={tableColumns}
