@@ -1,5 +1,6 @@
 {
   "name": "my-ui-comps",
+  "homepage": "https://greatdeal.space/ui-comps",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
