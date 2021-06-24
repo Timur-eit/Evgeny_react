@@ -73,7 +73,7 @@ function App({
           {/*/>*/}
           <ControlPanel className='control-panel'/>
         </Route>
-        <Route exact path='/'>
+        <Route exact path='/data-table'>
         </Route>
         <Route path='*'>
           Code 404<br />
