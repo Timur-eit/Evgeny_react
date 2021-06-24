@@ -83,7 +83,7 @@ function App() {
           <h2>Color Picker (gradinet)</h2>
           <ColorPicker />
         </Route>        
-        <Route exact path='/'>
+        <Route exact path='/ui-comps'>
           <h2>Please choose link</h2>
         </Route>
         <Route path='*'>
