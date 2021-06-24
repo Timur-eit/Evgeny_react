@@ -1,5 +1,6 @@
 {
   "name": "my-table",
+  "homepage": "https://greatdeal.space/data-table",
   "version": "0.1.0",
   "private": false,
   "dependencies": {
